@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  <!-- 每个servlet文件都必须注册到WEB容器中 -->
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AuctionLoginServlet</servlet-name>
+    <!--  如何保证文件地址一定正确,可以摁住ctrl+点击-->
+    <servlet-class>com.qianfeng.servlet.AuctionLoginServlet</servlet-class>
+  </servlet>
+<!-- 一个servlet可以有N个文件映射的地址 -->
+  <servlet-mapping>
+    <servlet-name>AuctionLoginServlet</servlet-name>
+    <url-pattern>/AuctionLoginServlet</url-pattern>
+  </servlet-mapping>
+ 
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
