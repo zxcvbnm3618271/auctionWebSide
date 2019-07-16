@@ -1,37 +1,32 @@
 package com.qianfeng.biz.Impl;
 
-import com.qianfeng.biz.AuctionUserBIZ;
-import com.qianfeng.dao.AuctionUserDAO;
-import com.qianfeng.dao.Impl.AuctionUserDAOImpl;
-import com.qianfeng.entity.AuctionUser;
-import com.qianfeng.enums.AuctionLoginStateEnum;
-import com.qianfeng.util.MD5;
-import com.qianfeng.util.StringUtil;
+import java.math.BigDecimal;
+import java.util.List;
 
-public class AuctionBIZImpl implements AuctionUserBIZ {
+import com.qianfeng.biz.AuctionBIZ;
+import com.qianfeng.dao.AuctionDAO;
+import com.qianfeng.dao.Impl.AuctionDAOImpl;
+import com.qianfeng.entity.Auction;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+public class AuctionBIZImpl implements AuctionBIZ {
+
+	AuctionDAO auctionDAO=new AuctionDAOImpl();
+	
+	@Override
+	public List<Auction> auctionListByPage(BigDecimal pageIndex,
+			BigDecimal pageNum) {
+		// TODO Auto-generated method stub
+		//哪怕业务逻辑层没有对应的业务逻辑 也不要没有业务层
+		//分页的定律 必须在页码的基础上-1
+		//limit 分页 10(从第10条开始),5(在第10条的基础山向前推进5条数据)
+		return auctionDAO.AuctionListByPage(pageIndex.subtract(new BigDecimal(1)).multiply(pageNum), pageNum);
+	}
 
 	@Override
-	public String auctionUserLogin(String userName, String passWord,
-			String userInputCode, String sysCode) {
+	public BigDecimal getAllCount() {
 		// TODO Auto-generated method stub
-		if (StringUtil.isEmpty(userInputCode) || StringUtil.isEmpty(sysCode)) {
-			return AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATECODE_ERROR
-					.getValue();
-		}
-
-		if (!userInputCode.equals(sysCode)) {
-			return AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATECODE_ERROR
-					.getValue();
-		}
-		// 如果上面的场景全部满足 判断数据库是否能匹配
-		AuctionUserDAO auctionUserDAO = new AuctionUserDAOImpl();
-		// 一般密码使用MD5加密 散列次数越高 越难破解
-		AuctionUser auctionUser = auctionUserDAO.auctionLogin(userName,
-				MD5.MD5(passWord));
-		if (auctionUser == null) {
-			return AuctionLoginStateEnum.AUCTION_LOGIN_FAIL.getValue();
-		}
-		return AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS.getValue();
+		return auctionDAO.getAllCount();
 	}
 
 }

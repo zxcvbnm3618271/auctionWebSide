@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.qianfeng.biz.AuctionBIZ;
 import com.qianfeng.biz.AuctionUserBIZ;
 import com.qianfeng.biz.Impl.AuctionBIZImpl;
+import com.qianfeng.biz.Impl.AuctionUserBIZImpl;
 import com.qianfeng.enums.AuctionLoginStateEnum;
 import com.qianfeng.util.JDBCUtil;
 
@@ -84,20 +86,22 @@ public class AuctionLoginServlet extends HttpServlet {
 		// 获取系统生成的验证码
 		String sysCode = (String) request.getSession().getAttribute("numrand");
 
-		AuctionUserBIZ auctionUserBIZ = new AuctionBIZImpl();
+		AuctionUserBIZ auctionUserBIZ = new AuctionUserBIZImpl();
 		// 调用业务逻辑层获取到对相应的返回值(用户登陆状态)
 		String loginState = auctionUserBIZ.auctionUserLogin(userName, passWord,
-				userInputCode, sysCode);
+				userInputCode, sysCode,request);
 		// 带参重定向
 		try {
-			if (loginState.equals(AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS.getValue())) {
-				request.getRequestDispatcher("auctionList.jsp").forward(request, response);
-			}else{
+			if (loginState.equals(AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS
+					.getValue())) {
+				request.getRequestDispatcher(
+						"AuctionListServlet?msg=" + loginState + "").forward(
+						request, response);
+			} else {
 				request.getRequestDispatcher("login.jsp?msg=" + loginState + "")
-				.forward(request, response);
+						.forward(request, response);
 			}
-			
-			
+
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

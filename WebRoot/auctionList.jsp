@@ -62,7 +62,7 @@
 				<h1 class="lf">在线拍卖系统</h1>
 				<c:if test="${not empty sessionScope.user}">
 					<div class="logout right">
-						<a href="doLogout" title="注销">注销</a>
+						<a href="AuctionLogoutServlet" title="注销">注销</a>
 					</div>
 				</c:if>
 				<c:if test="${empty sessionScope.user}">
@@ -107,7 +107,7 @@
 					<c:forEach step="1" begin="1" end="${auctionPageInfo.endPage }"
 						var="pageIndex">
 						<%
-							count++;
+							 count++;
 						%>
 						<a href="javascript:goToPage(<%=count%>)"> <%=count%></a>
 					</c:forEach>
