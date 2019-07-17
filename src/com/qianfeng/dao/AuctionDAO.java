@@ -11,4 +11,9 @@ public interface AuctionDAO {
 	BigDecimal getAllCount();
 	
    int auctionAdd(Auction auction)throws Exception;
+
+   Auction auctionFindById(int auctionid);
+
+   int auctionUpdate(Auction auction)throws Exception;
 }
+

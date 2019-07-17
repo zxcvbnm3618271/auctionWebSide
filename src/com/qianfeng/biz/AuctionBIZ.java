@@ -28,4 +28,9 @@ public interface AuctionBIZ {
 
 	String auctionAdd(ServletConfig config, HttpServletRequest request,
 			HttpServletResponse response);
+	
+	Auction auctionFindById(int auctionId);
+	
+	String auctionUpdate(ServletConfig config, HttpServletRequest request,
+			HttpServletResponse response);
 }

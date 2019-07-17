@@ -34,12 +34,14 @@ public class AuctionListServlet extends HttpServlet {
 		String pageIndex = req.getParameter("pageIndex");
 		// 每页显示的条数
 		String pageNum = "5";
-		//如果用户是分页操作进入到这个文件中 state为null
-		if(state!=null)
-		{
-			if (state
-					.equals(AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS.getValue()) || state.equals(AuctionStateEnum.AUCTION_ADD_SUCCESS.getValue())) {
-				// 如果用户是登录 进入到这个文件 那么当前的页码是1
+		// 如果用户是分页操作进入到这个文件中 state为null
+		if (state != null) {
+			// 如果用户是登录 进入到这个文件 那么当前的页码是1
+			if (state.equals(AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS
+					.getValue())
+					|| state.equals(AuctionStateEnum.AUCTION_ADD_SUCCESS
+							.getValue())) {
+
 				pageIndex = "1";
 			}
 		}
@@ -48,29 +50,37 @@ public class AuctionListServlet extends HttpServlet {
 		try {
 			// 查询出拍卖品的总条数
 			BigDecimal totalCount = auctionBIZ.getAllCount();
-			BigDecimal pageIndex2=new BigDecimal(pageIndex);
-			BigDecimal endPage=totalCount.divide(new BigDecimal(pageNum), 0,
+			BigDecimal pageIndex2 = new BigDecimal(pageIndex);
+			// if (pageIndex!=null) {
+			// if
+			// (state.equals(AuctionStateEnum.AUCTION_ADD_SUCCESS.getValue())) {
+			//
+			// }
+			// }
+			BigDecimal endPage = totalCount.divide(new BigDecimal(pageNum), 0,
 					BigDecimal.ROUND_UP);
-			//如果用户是添加成功的操作进来 那么pageindex就应该等于尾页
-			if (state!=null) {
-				if (state.equals(AuctionStateEnum.AUCTION_ADD_SUCCESS.getValue())) {
-					pageIndex2=endPage;
+			// 如果用户是添加成功的操作进来 那么pageindex就应该等于尾页
+			if (state != null) {
+				if (state.equals(AuctionStateEnum.AUCTION_ADD_SUCCESS
+						.getValue())) {
+					pageIndex2 = endPage;
 				}
 			}
 			List<Auction> auctionList = auctionBIZ.auctionListByPage(
 					pageIndex2, new BigDecimal(pageNum));
 			pageVO<Auction> pageVO = new pageVO<Auction>();
-			
+
 			pageVO.setLists(auctionList);
 			pageVO.setPageIndex(pageIndex2);
 			pageVO.setPageNum(new BigDecimal(pageNum));
 			pageVO.setTotal(totalCount);
 			// 尾页等于总条数除 每页显示的条数 divide 后面的三个参数 分别是 被除数 取正 四舍五入
 			pageVO.setEndPage(endPage);
-//			auctionBIZ.auctionListByPage(new BigDecimal(pageIndex), new BigDecimal(
-//					pageNum));
-			//jiangpagevo存入请求体中
-			
+			// auctionBIZ.auctionListByPage(new BigDecimal(pageIndex), new
+			// BigDecimal(
+			// pageNum));
+			// jiangpagevo存入请求体中
+
 			req.setAttribute("auctionPageInfo", pageVO);
 			req.getRequestDispatcher("auctionList.jsp").forward(req, resp);
 		} catch (ServletException e) {
