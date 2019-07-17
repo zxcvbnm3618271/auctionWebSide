@@ -24,7 +24,10 @@
     <servlet-name>AuctionLogoutServlet</servlet-name>
     <servlet-class>com.qianfeng.servlet.AuctionLogoutServlet</servlet-class>
   </servlet>
-
+<servlet>
+<servlet-name>AuctionAddServlet</servlet-name>
+<servlet-class>com.qianfeng.servlet.AuctionAddServlet</servlet-class>
+</servlet>
   
 <!-- 一个servlet可以有N个文件映射的地址 -->
   <servlet-mapping>
@@ -39,6 +42,11 @@
   <servlet-mapping>
     <servlet-name>AuctionLogoutServlet</servlet-name>
     <url-pattern>/AuctionLogoutServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  <servlet-name>AuctionAddServlet</servlet-name>
+  <url-pattern>/AuctionAddServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

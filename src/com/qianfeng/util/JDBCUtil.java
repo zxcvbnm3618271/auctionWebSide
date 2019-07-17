@@ -36,7 +36,7 @@ public class JDBCUtil {
 	public static Connection getConnection() throws SQLException {
 
 		connection = DriverManager.getConnection(
-				"jdbc:mysql://39.108.55.167:3306/test?useSSL=false", "root",
+				"jdbc:mysql://39.108.55.167:3306/test?useSSL=false&useUnicode=true&CharacterEncoding=utf-8", "root",
 				"2FF39aa8820f");
 		return connection;
 	}

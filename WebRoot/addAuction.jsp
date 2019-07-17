@@ -31,7 +31,7 @@ function previewFile() {
 </script>
 </head>
 <body>
-	<form id="postForm" action="AuctionAddSerlvet" enctype="multipart/form-data"
+	<form id="postForm" action="AuctionAddServlet" enctype="multipart/form-data"
 		method="post">
 		<div class="wrap">
 			<!-- main begin-->

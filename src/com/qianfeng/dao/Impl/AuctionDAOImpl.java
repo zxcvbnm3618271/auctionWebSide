@@ -78,4 +78,35 @@ public class AuctionDAOImpl implements AuctionDAO {
 		return totalCount;
 	}
 
+	@Override
+	public int auctionAdd(Auction auction) throws Exception {
+		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int resultCount = 0;
+			connection = JDBCUtil.getConnection();
+			// id不需要插入 这个由数据自增长来实现
+			preparedStatement = connection
+					.prepareStatement("insert into auction(AUCTIONNAME,AUCTIONSTARTPRICE,AUCTIONUPSET,AUCTIONSTARTTIME,AUCTIONENDTIME,AUCTIONDESC,AUCTIONPICPATH,CREATETIME,UPDATETIME) values(?,?,?,?,?,?,?,?,?)");
+			preparedStatement.setString(1, auction.getAuctionName());
+			preparedStatement.setDouble(2, auction.getAuctionStartPrice());
+			preparedStatement.setDouble(3, auction.getAuctionUpset());
+			preparedStatement.setTimestamp(4,
+					auction.getAuctionStartTime());
+			preparedStatement.setTimestamp(5,
+					auction.getAuctionEndTime());
+			preparedStatement.setString(6, auction.getAuctionDESC());
+			preparedStatement.setString(7, auction.getAuctionPICPath());
+			preparedStatement.setTimestamp(8,
+					auction.getCreateTime());
+			preparedStatement.setTimestamp(9,
+					auction.getUpdateTime());
+			resultCount = preparedStatement.executeUpdate();
+			System.out.println(resultCount);
+			preparedStatement.close();
+			connection.close();
+		
+		return resultCount;
+	}
+
 }
