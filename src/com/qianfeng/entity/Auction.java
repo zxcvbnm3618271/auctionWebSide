@@ -13,6 +13,16 @@ public class Auction {
 	private String auctionPICPath;
 	private Timestamp createTime;
 	private Timestamp updateTime;
+	
+	public Auction() {
+		
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Auction(int auctionID) {
+		this.auctionID=auctionID;
+		// TODO Auto-generated constructor stub
+	}
 	public int getAuctionID() {
 		return auctionID;
 	}

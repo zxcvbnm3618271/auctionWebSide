@@ -47,4 +47,27 @@ public class AuctionRecordDAOImpl implements AuctionRecordDAO {
 		return auctionRecords;
 	}
 
+	@Override
+	public int auctionRecordAdd(AuctionRecord auctionRecord) {
+		// TODO Auto-generated method stub
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		int resultCount=0;
+		try {
+			connection=JDBCUtil.getConnection();
+			preparedStatement=connection.prepareStatement("insert into auctionrecord(USERID,AUCTIONID,AUCTIONTIME,AUCTIONPRICE) values(?,?,?,?)");
+			preparedStatement.setInt(1, auctionRecord.getAuctionUser().getUserID());
+			preparedStatement.setInt(2, auctionRecord.getAuction().getAuctionID());
+			preparedStatement.setTimestamp(3, auctionRecord.getAuctionTime());
+			preparedStatement.setDouble(4, auctionRecord.getAuctionPrice());
+			resultCount=preparedStatement.executeUpdate();
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			JDBCUtil.close();
+		}
+		return resultCount;
+	}
+
 }

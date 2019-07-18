@@ -5,6 +5,15 @@ public class AuctionUser {
 	private String userName;
 	private String userPassWord;
 	private Boolean userIsAdmin;
+	private int UserID;
+	
+	public int getUserID() {
+		return UserID;
+	}
+
+	public void setUserID(int userID) {
+		UserID = userID;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -31,9 +40,11 @@ public class AuctionUser {
 	}
 
 	public AuctionUser() {
-		super();
+		
 	}
-
+	public AuctionUser(int userID) {
+		this.UserID=userID;
+	}
 	@Override
 	public String toString() {
 		return "AuctionUser [userName=" + userName + ", userPassWord="

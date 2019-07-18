@@ -16,5 +16,10 @@ public class AuctionRecordBIZImpl implements AuctionRecordBIZ {
 		// TODO Auto-generated method stub
 		return auctionRecordDAO.findAuctionRecordByAuctionId(auctionid);
 	}
+	@Override
+	public int auctionRecordAdd(AuctionRecord auctionRecord) {
+		// TODO Auto-generated method stub
+		return auctionRecordDAO.auctionRecordAdd(auctionRecord);
+	}
 
 }

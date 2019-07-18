@@ -10,7 +10,7 @@ public class AuctionRecord {
 	//一个用户可以竞拍多个拍卖品 所以对于拍卖品记录表而言 它和AUCTIONUSER是一个多(AuctionRecord)对一(AuctionUser)的关系
 	//单向的多(第一个字指的是当前的实体类)对1(声明的属性)
 	private AuctionUser auctionUser;
-	private Auction auctionID;
+	private Auction auction;
 	private Timestamp auctionTime;
 	private double auctionPrice;
 	public int getId() {
@@ -25,11 +25,11 @@ public class AuctionRecord {
 	public void setAuctionUser(AuctionUser auctionUser) {
 		this.auctionUser = auctionUser;
 	}
-	public Auction getAuctionID() {
-		return auctionID;
+	public Auction getAuction() {
+		return auction;
 	}
-	public void setAuctionID(Auction auctionID) {
-		this.auctionID = auctionID;
+	public void setAuction(Auction auction) {
+		this.auction = auction;
 	}
 	public Timestamp getAuctionTime() {
 		return auctionTime;
@@ -46,9 +46,10 @@ public class AuctionRecord {
 	@Override
 	public String toString() {
 		return "AuctionRecord [id=" + id + ", auctionUser=" + auctionUser
-				+ ", auctionID=" + auctionID + ", auctionTime=" + auctionTime
+				+ ", auction=" + auction + ", auctionTime=" + auctionTime
 				+ ", auctionPrice=" + auctionPrice + "]";
 	}
+	
 	
 	
 	

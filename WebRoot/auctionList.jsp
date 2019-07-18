@@ -125,7 +125,7 @@
 									href="AuctionFindByIdServlet?auctionid=${auction.auctionID}&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
           		<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>
           	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
-								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }">竞拍</a>
+								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
 							</c:if>
 						</li>
 					</ul>

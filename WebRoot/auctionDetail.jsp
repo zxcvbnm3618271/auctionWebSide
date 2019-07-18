@@ -19,7 +19,6 @@
 
 	$(function(){
 		$("#showError").hide();
-		
 		$("#saleForm").submit(function(){
 			//每次竞拍最大价格
 			var maxPrice=$("#details ul:first li:eq(1)").text();
@@ -46,19 +45,30 @@
 	});
 
 </script>
+<script type="text/javascript">
+	<%
+String pageIndex=request.getParameter("pageIndex");
+String msg=request.getParameter("msg");
+if("success".equals(msg))
+{
+	out.print("alert('竞拍成功')");
+}else if("error".equals(msg)){
+out.print("alert('竞拍失败')");
+}
+ %>
+</script>
 </head>
-
 <body>
 	<div class="wrap">
 		<!-- main begin-->
 		<div class="sale">
 			<h1 class="lf">在线拍卖系统</h1>
-			<c:if test="${user != null}">
+			<c:if test="${sessionScope.user != null}">
 					<div class="logout right">
 						<a href="LoginOutServlet" title="注销">注销</a>
 					</div>
 				</c:if>
-				<c:if test="${user == null}">
+				<c:if test="${sessionScope.user == null}">
 					<div class="logout right">
 						<a href="login.jsp" title="登录">登录</a>
 					</div>
@@ -91,13 +101,16 @@
 		</div>
 		<div class="cl"></div>
 		<div class="top10 salebd">
-			<form action="AuctionGoodsServlet"
+			<form action="AuctionRecordAddServlet"
 				method="post" id="saleForm">
 				<p>
 					<label for="sale">出价：</label> <input name="auctionPrice"
 						type="text" class="inputwd" id="sale" value=""/> <input
 						type="submit" value="竞 拍" class="spbg buttombg f14  sale-buttom" 
 						/>
+						<input name="auctionid" value="${AuctionObj.auctionID}" style="display:none;">
+						<input name="userid" value="${sessionScope.user.userID}" style="display:none;">
+						
 				</p>
 			</form>
 			<p class="f14 red" id="showError">不能低于最高竞拍价</p>
@@ -105,9 +118,9 @@
 		</div>
 		<div class="top10">
 			<input name="" type="button" value="刷 新" class="spbg buttombg f14" 
-			onclick="javascript:location='AuctionServlet?id=${AuctionObj.auctionID }&choice=contend'"/>
+			onclick="javascript:location='AuctionRecordServlet?auctionId=${AuctionObj.auctionID }&pageIndex=<%=pageIndex%>'"/>
 			<input name="" type="button" value="返回列表" class="spbg buttombg f14"
-				onclick="javascript:location='PageServlet'" />
+				onclick="javascript:location='AuctionListServlet?pageIndex=<%=pageIndex%>'" />
 		</div>
 
 		<div class="offer">
