@@ -15,5 +15,10 @@ public interface AuctionDAO {
    Auction auctionFindById(int auctionid);
 
    int auctionUpdate(Auction auction)throws Exception;
+   int auctionDelByID(int auctionid);
+   
+	List<Auction> searchEndAuctionList();
+	
+	List<Auction> searchNotEndAuctionList();
 }
 

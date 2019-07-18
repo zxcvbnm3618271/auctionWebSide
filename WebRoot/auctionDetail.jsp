@@ -67,27 +67,27 @@
 		<div class="items sg-font lf">
 			<ul class="rows">
 				<li>名称：</li>
-				<li class="borderno">${AuctionObj.auctionname }</li>
+				<li class="borderno">${AuctionObj.auctionName }</li>
 			</ul>
 			<ul class="rows">
 				<li>描述：</li>
-				<li class="borderno">${AuctionObj.auctiondesc }</li>
+				<li class="borderno">${AuctionObj.auctionDESC }</li>
 			</ul>
 			<ul class="rows">
 				<li>开始时间：</li>
-				<li class="borderno">${AuctionObj.auctionstarttime }</li>
+				<li class="borderno">${AuctionObj.auctionStartTime }</li>
 			</ul>
 			<ul class="rows">
 				<li>结束时间：</li>
-				<li class="borderno">${AuctionObj.auctionendtime }</li>
+				<li class="borderno">${AuctionObj.auctionEndTime }</li>
 			</ul>
 			<ul class="rows border-no">
 				<li>起拍价：</li>
-				<li class="borderno" id="startPrice">${AuctionObj.auctionstartprice }</li>
+				<li class="borderno" id="startPrice">${AuctionObj.auctionStartPrice }</li>
 			</ul>
 		</div>
 		<div class="rg borders">
-			<img src="<%=basePath%>upload/${AuctionObj.auctionpicpath }" width="270" alt="" />
+			<img src="<%=basePath%>upload/${AuctionObj.auctionPICPath }" width="270" alt="" />
 		</div>
 		<div class="cl"></div>
 		<div class="top10 salebd">
@@ -105,7 +105,7 @@
 		</div>
 		<div class="top10">
 			<input name="" type="button" value="刷 新" class="spbg buttombg f14" 
-			onclick="javascript:location='AuctionServlet?id=${AuctionObj.auctionid }&choice=contend'"/>
+			onclick="javascript:location='AuctionServlet?id=${AuctionObj.auctionID }&choice=contend'"/>
 			<input name="" type="button" value="返回列表" class="spbg buttombg f14"
 				onclick="javascript:location='PageServlet'" />
 		</div>
@@ -126,9 +126,9 @@
 					<div id="details">
 					<c:forEach items="${record_list}" var="record" varStatus="index">
 						<ul class="rows">
-							<li>${record.auctiontime }</li>
-							<li id="price${index.index }">${record.auctionprice }</li>
-							<li class="borderno">${record.auctionuser.username }</li>
+							<li>${record.auctionTime }</li>
+							<li id="price${index.index }">${record.auctionPrice }</li>
+							<li class="borderno">${record.auctionUser.userName }</li>
 						</ul>
 					</c:forEach>
 					</div>

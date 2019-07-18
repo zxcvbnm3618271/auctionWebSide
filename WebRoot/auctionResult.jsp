@@ -36,11 +36,11 @@
 				   
 				<c:forEach items="${requestScope.map['end'] }" var="notend">
 					<ul class="rows">
-						<li>${notend.auctionname }</li>
-						<li>${notend.auctionstarttime }</li>
-						<li>${notend.auctionendtime }</li>
-						<li>${notend.auctionstartprice }</li>
-						<li><img src="<%=basePath %>upload/${notend.auctionpicpath }"
+						<li>${notend.auctionName }</li>
+						<li>${notend.auctionStartTime }</li>
+						<li>${notend.auctionEndTime }</li>
+						<li>${notend.auctionStartPrice }</li>
+						<li><img src="<%=basePath %>upload/${notend.auctionPICPath }"
 							width="270" alt="" />
 						</li>
 						<li class="borderno blue record"></li>
@@ -63,11 +63,11 @@
 				</ul>
 				<c:forEach items="${requestScope.map['notend'] }" var="notend">
 					<ul class="rows">
-						<li>${notend.auctionname }</li>
-						<li>${notend.auctionstarttime }</li>
-						<li>${notend.auctionendtime }</li>
-						<li>${notend.auctionstartprice }</li>
-						<li><img src="<%=basePath %>upload/${notend.auctionpicpath }"
+						<li>${notend.auctionName }</li>
+						<li>${notend.auctionStartTime}</li>
+						<li>${notend.auctionEndTime }</li>
+						<li>${notend.auctionStartPrice }</li>
+						<li><img src="<%=basePath %>upload/${notend.auctionPICPath }"
 							width="270" alt="" />
 						</li>
 						</li>

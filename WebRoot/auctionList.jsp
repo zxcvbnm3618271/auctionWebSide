@@ -14,11 +14,37 @@
 <title>无标题文档</title>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 	function goToPage(pageIndex) {
 		document.forms[1].action = document.forms[1].action + "?pageIndex="
 				+ pageIndex;
 		document.forms[1].submit();
+	}
+	//在使用ajax的时候 要导入jquery的包
+	function delAuction(arg){
+	var $usarg=$(arg);
+	//获取自定义属性
+	var auctionid=$usarg.attr("auctionid");
+	auctionid={
+		"auctionid":auctionid
+	};
+	//删除一定要做确认的操作
+	if(confirm("您确定要删除吗?")){
+		$.ajax({
+		url:"AuctionDelByIdServlet",
+		data:auctionid,
+		dataType:"json",
+		success:function(data){
+		if(data){
+		$usarg.parent().parent().remove();
+		}
+		},
+		error:function(){
+		alert("删除失败");
+		}
+		});
+	}
 	}
 </script>
 
@@ -55,7 +81,7 @@
 				<input type="button" onclick="location='addAuction.jsp'" value="发布"
 					class="spbg buttombg f14  sale-buttom buttomb" />
 			</c:if>
-			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="auctionResult"><b>查看竞拍结果</b>
+			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="auctionResultServlet"><b>查看竞拍结果</b>
 			</a>
 		</div>
 	</form>
@@ -97,9 +123,9 @@
 								test="${sessionScope.user.userIsAdmin==true }">
 								<a
 									href="AuctionFindByIdServlet?auctionid=${auction.auctionID}&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
-          		删除
+          		<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>
           	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
-								<a href="auctionDetail?auctionId=${auction.auctionID }">竞拍</a>
+								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }">竞拍</a>
 							</c:if>
 						</li>
 					</ul>

@@ -277,4 +277,22 @@ public class AuctionBIZImpl implements AuctionBIZ {
 		return auctionState;
 	}
 
+	@Override
+	public int auctionDelByID(int auctionid) {
+		// TODO Auto-generated method stub
+		return auctionDAO.auctionDelByID(auctionid);
+	}
+
+	@Override
+	public List<Auction> searchEndAuctionList() {
+		// TODO Auto-generated method stub
+		return auctionDAO.searchEndAuctionList();
+	}
+
+	@Override
+	public List<Auction> searchNotEndAuctionList() {
+		// TODO Auto-generated method stub
+		return auctionDAO.searchNotEndAuctionList();
+	}
+
 }

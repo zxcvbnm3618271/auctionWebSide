@@ -33,4 +33,10 @@ public interface AuctionBIZ {
 	
 	String auctionUpdate(ServletConfig config, HttpServletRequest request,
 			HttpServletResponse response);
+	
+	int auctionDelByID(int auctionid);
+	
+	List<Auction> searchEndAuctionList();
+	
+	List<Auction> searchNotEndAuctionList();
 }
