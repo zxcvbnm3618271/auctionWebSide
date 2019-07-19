@@ -65,7 +65,7 @@ out.print("alert('竞拍失败')");
 			<h1 class="lf">在线拍卖系统</h1>
 			<c:if test="${sessionScope.user != null}">
 					<div class="logout right">
-						<a href="LoginOutServlet" title="注销">注销</a>
+						<a href="AuctionLogoutServlet" title="注销">注销</a>
 					</div>
 				</c:if>
 				<c:if test="${sessionScope.user == null}">
@@ -101,7 +101,7 @@ out.print("alert('竞拍失败')");
 		</div>
 		<div class="cl"></div>
 		<div class="top10 salebd">
-			<form action="AuctionRecordAddServlet"
+			<form action="AuctionRecordAddServlet?auctionId=${AuctionObj.auctionID }&pageIndex=<%=pageIndex%>"
 				method="post" id="saleForm">
 				<p>
 					<label for="sale">出价：</label> <input name="auctionPrice"

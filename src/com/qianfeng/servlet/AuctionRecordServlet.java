@@ -67,7 +67,7 @@ public class AuctionRecordServlet extends HttpServlet {
 	 * @throws IOException
 	 *             if an error occurred
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String auctionid = request.getParameter("auctionId");
 		AuctionBIZ auctionBIZ = new AuctionBIZImpl();
@@ -79,15 +79,14 @@ public class AuctionRecordServlet extends HttpServlet {
 					.findAuctionRecordByAuctionId(Integer.parseInt(auctionid));
 			request.setAttribute("AuctionObj", auction);
 			request.setAttribute("record_list", recoredList);
-			request.getRequestDispatcher("auctionDetail.jsp").forward(request,
-					response);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		try {
+			request.getRequestDispatcher("auctionDetail.jsp").forward(request,
+					response);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

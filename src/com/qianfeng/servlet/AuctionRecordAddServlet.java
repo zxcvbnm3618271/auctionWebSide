@@ -72,23 +72,36 @@ public class AuctionRecordAddServlet extends HttpServlet {
 		String auctionID = request.getParameter("auctionid");
 		String userID = request.getParameter("userid");
 		AuctionRecordBIZ auctionRecordBIZ = new AuctionRecordBIZImpl();
-		
+
 		try {
 			AuctionRecord auctionRecord = new AuctionRecord();
 			auctionRecord.setAuctionPrice(Double.parseDouble(auctionPrice));
-			auctionRecord.setAuctionTime(new Timestamp(System.currentTimeMillis()));
-			auctionRecord.setAuctionUser(new AuctionUser(Integer.parseInt(userID)));
+			auctionRecord.setAuctionTime(new Timestamp(System
+					.currentTimeMillis()));
+			auctionRecord.setAuctionUser(new AuctionUser(Integer
+					.parseInt(userID)));
 			auctionRecord.setAuction(new Auction(Integer.parseInt(auctionID)));
 
 			int resultCount = auctionRecordBIZ.auctionRecordAdd(auctionRecord);
 			if (resultCount > 0) {
-				request.getRequestDispatcher(
-						"AuctionRecordServlet?auctionId=" + auctionID
-								+ "&msg=success").forward(request, response);
+				try {
+					request.getRequestDispatcher(
+							"AuctionRecordServlet?auctionId=" + auctionID
+									+ "&msg=success")
+							.forward(request, response);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
-				request.getRequestDispatcher(
-						"AuctionRecordServlet?auctionId=" + auctionID
-								+ "&msg=error").forward(request, response);
+				try {
+					request.getRequestDispatcher(
+							"AuctionRecordServlet?auctionId=" + auctionID
+									+ "&msg=error").forward(request, response);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

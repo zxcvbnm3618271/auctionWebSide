@@ -1,4 +1,6 @@
+<%@page import="java.math.BigDecimal"%>
 <%@page import="com.qianfeng.enums.AuctionStateEnum"%>
+<%@page import="com.qianfeng.servlet.AuctionListServlet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -18,34 +20,45 @@
 <script type="text/javascript">
 	function goToPage(pageIndex) {
 		document.forms[1].action = document.forms[1].action + "?pageIndex="
-				+ pageIndex;
+				+ pageIndex + "&pageNum=${auctionPageInfo.pageNum}";
 		document.forms[1].submit();
 	}
 	//在使用ajax的时候 要导入jquery的包
-	function delAuction(arg){
-	var $usarg=$(arg);
-	//获取自定义属性
-	var auctionid=$usarg.attr("auctionid");
-	auctionid={
-		"auctionid":auctionid
-	};
-	//删除一定要做确认的操作
-	if(confirm("您确定要删除吗?")){
-		$.ajax({
-		url:"AuctionDelByIdServlet",
-		data:auctionid,
-		dataType:"json",
-		success:function(data){
-		if(data){
-		$usarg.parent().parent().remove();
+	function delAuction(arg) {
+		var $usarg = $(arg);
+		//获取自定义属性
+		var auctionid = $usarg.attr("auctionid");
+		auctionid = {
+			"auctionid" : auctionid
+		};
+		//删除一定要做确认的操作
+		if (confirm("您确定要删除吗?")) {
+			$.ajax({
+				url : "AuctionDelByIdServlet",
+				data : auctionid,
+				dataType : "json",
+				success : function(data) {
+					if (data) {
+						$usarg.parent().parent().remove();
+					}
+				},
+				error : function() {
+					alert("删除失败");
+				}
+			});
 		}
-		},
-		error:function(){
-		alert("删除失败");
-		}
-		});
 	}
+//通过参数重传的方式刷新页面,缺点是响应速度没有局部刷新快,优点是易于实现
+	function ChangepageNum(arg) {
+	
+		location.href = "AuctionListServlet?pageIndex=1&pageNum="
+				+ arg + "";
 	}
+	//find这个函数在jquery中用的非常多可以解决一些被封装的元素的样式修改
+	$(function() {
+		$("#pagenum").find("option[value=${auctionPageInfo.pageNum}]").attr(
+				"selected", true);
+	})
 </script>
 
 <script type="text/javascript">
@@ -67,7 +80,7 @@
 </head>
 
 <body>
-	<form action="SearchAuction" method="post">
+	<form action="SearchAuctionServlet" method="post">
 		<div class="forms">
 			<label for="name">名称</label> <input name="auctionName" type="text"
 				class="nwinput" id="name" /> <label for="time">开始时间</label> <input
@@ -123,18 +136,25 @@
 								test="${sessionScope.user.userIsAdmin==true }">
 								<a
 									href="AuctionFindByIdServlet?auctionid=${auction.auctionID}&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
-          		<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>
-          	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
-								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
-							</c:if>
-						</li>
+								<a auctionid="${auction.auctionID}" onclick="delAuction(this)"
+									href="#">删除</a>
+							</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
+								<a
+									href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
+							</c:if></li>
 					</ul>
 				</c:forEach>
 				<%
 					int count = 0;
 				%>
 				<div class="page">
-					<a href="javascript:goToPage(1)">首页</a>
+					<select id="pagenum" onchange="ChangepageNum(this.value)">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+					</select> <a href="javascript:goToPage(1)">首页</a>
 					<c:if test="${auctionPageInfo.pageIndex!=1}">
 						<a href="javascript:goToPage(${auctionPageInfo.pageIndex-1 })">上一页</a>
 					</c:if>

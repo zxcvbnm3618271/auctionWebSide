@@ -65,6 +65,13 @@
     <servlet-name>AuctionRecordAddServlet</servlet-name>
     <servlet-class>com.qianfeng.servlet.AuctionRecordAddServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SearchAuctionServlet</servlet-name>
+    <servlet-class>com.qianfeng.servlet.SearchAuctionServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -115,6 +122,24 @@
     <servlet-name>AuctionRecordAddServlet</servlet-name>
     <url-pattern>/AuctionRecordAddServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchAuctionServlet</servlet-name>
+    <url-pattern>/SearchAuctionServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <filter>
+  <filter-name>FileFilter</filter-name>
+  <filter-class>com.qianfeng.filter.FileFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  <filter-name>FileFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>

@@ -65,13 +65,16 @@ public class AuctionUpdateServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 		AuctionBIZ auctionBIZ = new AuctionBIZImpl();
 		String auctionState;
+		auctionState = auctionBIZ.auctionUpdate(getServletConfig(),
+				request, response);
 		try {
-			auctionState = auctionBIZ.auctionUpdate(getServletConfig(),
-					request, response);
 			request.getRequestDispatcher(
 					"AuctionListServlet?msg=" + auctionState + "").forward(
-					request, response);
-		} catch (Exception e) {
+							request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

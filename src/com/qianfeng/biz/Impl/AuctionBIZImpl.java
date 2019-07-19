@@ -295,4 +295,36 @@ public class AuctionBIZImpl implements AuctionBIZ {
 		return auctionDAO.searchNotEndAuctionList();
 	}
 
+	@Override
+	public List<Auction> searchAuctionList(String auctionName,
+			String auctionStartTime,String auctionEndTime, String auctionStartPrice) {
+		// TODO Auto-generated method stub
+		//非数字类型必须加单引号
+				StringBuilder sql;
+				sql = new StringBuilder("select * from auction where 1=1 ");
+				try {
+					
+					if (StringUtil.notEmpty(auctionName)) {
+						//写模糊查询 切记不要前模糊 会引起全表检索
+						sql.append("and auctionname like '%"+auctionName+"%'");
+					}
+					if (StringUtil.notEmpty(auctionStartTime)) {
+						sql.append("and auctionstarttime >= '"+Timestamp.valueOf(auctionStartTime) + "'");
+						
+					}
+					if (StringUtil.notEmpty(auctionEndTime)) {
+						sql.append("and auctionendtime <= '"+Timestamp.valueOf(auctionEndTime) + "'");
+						
+					}
+					if (StringUtil.notEmpty(auctionStartPrice)) {
+						sql.append("and auctionstartprice >= '"+Double.parseDouble(auctionStartPrice) + "'");
+						
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return auctionDAO.searchAuctionList(sql.toString());
+	}
+
 }

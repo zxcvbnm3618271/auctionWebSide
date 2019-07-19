@@ -12,6 +12,8 @@ import java.util.List;
 import com.qianfeng.dao.AuctionDAO;
 import com.qianfeng.entity.Auction;
 import com.qianfeng.util.JDBCUtil;
+import com.qianfeng.util.StringUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class AuctionDAOImpl implements AuctionDAO {
 
@@ -180,10 +182,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		int resultCount=0;
+		int resultCount = 0;
 		try {
-			connection=JDBCUtil.getConnection();
-			preparedStatement = connection.prepareStatement("delete from auction where auctionid=?");
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection
+					.prepareStatement("delete from auction where auctionid=?");
 			preparedStatement.setInt(1, auctionid);
 			resultCount = preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -191,7 +194,7 @@ public class AuctionDAOImpl implements AuctionDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-			
+
 			JDBCUtil.close();
 
 		}
@@ -201,19 +204,20 @@ public class AuctionDAOImpl implements AuctionDAO {
 	@Override
 	public List<Auction> searchEndAuctionList() {
 		// TODO Auto-generated method stub
-		Connection connection=null;
-		PreparedStatement preparedStatement=null;
-		ResultSet resultSet=null;
-		List<Auction> auctions=new ArrayList<Auction>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Auction> auctions = new ArrayList<Auction>();
 		try {
-			
-			connection=JDBCUtil.getConnection();
-			preparedStatement=connection.prepareStatement("select * from auction where auctionendtime < ?");
-			preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-			resultSet=preparedStatement.executeQuery();
-			while(resultSet.next())
-			{
-				Auction auction=new Auction();
+
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection
+					.prepareStatement("select * from auction where auctionendtime < ?");
+			preparedStatement.setTimestamp(1,
+					new Timestamp(System.currentTimeMillis()));
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Auction auction = new Auction();
 				auction.setAuctionID(resultSet.getInt("AUCTIONID"));
 				auction.setAuctionName(resultSet.getString("AUCTIONNAME"));
 				auction.setAuctionStartPrice(resultSet
@@ -229,8 +233,7 @@ public class AuctionDAOImpl implements AuctionDAO {
 				auction.setUpdateTime(resultSet.getTimestamp("UPDATETIME"));
 				auctions.add(auction);
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			JDBCUtil.close();
@@ -242,41 +245,81 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public List<Auction> searchNotEndAuctionList() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
-				Connection connection=null;
-				PreparedStatement preparedStatement=null;
-				ResultSet resultSet=null;
-				List<Auction> auctions=new ArrayList<Auction>();
-				try {
-					
-					connection=JDBCUtil.getConnection();
-					preparedStatement=connection.prepareStatement("select * from auction where auctionendtime > ?");
-					preparedStatement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-					resultSet=preparedStatement.executeQuery();
-					while(resultSet.next())
-					{
-						Auction auction=new Auction();
-						auction.setAuctionID(resultSet.getInt("AUCTIONID"));
-						auction.setAuctionName(resultSet.getString("AUCTIONNAME"));
-						auction.setAuctionStartPrice(resultSet
-								.getDouble("AUCTIONSTARTPRICE"));
-						auction.setAuctionUpset(resultSet.getDouble("AUCTIONUPSET"));
-						auction.setAuctionStartTime(resultSet
-								.getTimestamp("AUCTIONSTARTTIME"));
-						auction.setAuctionEndTime(resultSet
-								.getTimestamp("AUCTIONENDTIME"));
-						auction.setAuctionDESC(resultSet.getString("AUCTIONDESC"));
-						auction.setAuctionPICPath(resultSet.getString("AUCTIONPICPATH"));
-						auction.setCreateTime(resultSet.getTimestamp("CREATETIME"));
-						auction.setUpdateTime(resultSet.getTimestamp("UPDATETIME"));
-						auctions.add(auction);
-					}
-					
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-					JDBCUtil.close();
-				}
-				return auctions;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Auction> auctions = new ArrayList<Auction>();
+		try {
+
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection
+					.prepareStatement("select * from auction where auctionendtime > ?");
+			preparedStatement.setTimestamp(1,
+					new Timestamp(System.currentTimeMillis()));
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Auction auction = new Auction();
+				auction.setAuctionID(resultSet.getInt("AUCTIONID"));
+				auction.setAuctionName(resultSet.getString("AUCTIONNAME"));
+				auction.setAuctionStartPrice(resultSet
+						.getDouble("AUCTIONSTARTPRICE"));
+				auction.setAuctionUpset(resultSet.getDouble("AUCTIONUPSET"));
+				auction.setAuctionStartTime(resultSet
+						.getTimestamp("AUCTIONSTARTTIME"));
+				auction.setAuctionEndTime(resultSet
+						.getTimestamp("AUCTIONENDTIME"));
+				auction.setAuctionDESC(resultSet.getString("AUCTIONDESC"));
+				auction.setAuctionPICPath(resultSet.getString("AUCTIONPICPATH"));
+				auction.setCreateTime(resultSet.getTimestamp("CREATETIME"));
+				auction.setUpdateTime(resultSet.getTimestamp("UPDATETIME"));
+				auctions.add(auction);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			JDBCUtil.close();
+		}
+		return auctions;
+	}
+
+	@Override
+	public List<Auction> searchAuctionList(String sql){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Auction> auctionList = new ArrayList<Auction>();
+		try {
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			Auction auction = null;
+			while(resultSet.next()) {
+				// set的拓展性好，虽然构造器时效高，但没有其他任何好处
+				auction = new Auction();
+				auction.setAuctionID(resultSet.getInt("AUCTIONID"));
+				auction.setAuctionName(resultSet.getString("AUCTIONNAME"));
+				auction.setAuctionStartPrice(resultSet
+						.getDouble("AUCTIONSTARTPRICE"));
+				auction.setAuctionUpset(resultSet.getDouble("AUCTIONUPSET"));
+				auction.setAuctionStartTime(resultSet
+						.getTimestamp("auctionStartTime"));
+				auction.setAuctionEndTime(resultSet
+						.getTimestamp("auctionEndTime"));
+				auction.setAuctionDESC(resultSet.getString("AUCTIONDESC"));
+				auction.setAuctionPICPath(resultSet.getString("AUCTIONPICPATH"));
+				auction.setCreateTime(resultSet.getTimestamp("CREATETIME"));
+				auction.setUpdateTime(resultSet.getTimestamp("UPDATETIME"));
+				
+				auctionList.add(auction);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JDBCUtil.close();
+		}
+		return auctionList;
 	}
 
 }
