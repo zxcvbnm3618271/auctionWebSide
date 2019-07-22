@@ -20,7 +20,7 @@ public class Auction extends AbstractAuction implements java.io.Serializable {
 	}
 
 	public Auction(int auctionID, String auctionName,
-			double auctionStartPrice, double auctionUpset,
+			Double auctionStartPrice, Double auctionUpset,
 			Timestamp auctionStartTime, Timestamp auctionEndTime,
 			String auctionDESC, String auctionPICPath, Timestamp createTime,
 			Timestamp updateTime, Set auctionrecords){

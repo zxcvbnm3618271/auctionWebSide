@@ -22,5 +22,5 @@ public interface AuctionDAO {
 
 	List<Auction> searchNotEndAuctionList();
 	
-	List<Auction> searchAuctionList(String sql);
+	List<Auction> searchAuctionList(String hql,Auction auction);
 }

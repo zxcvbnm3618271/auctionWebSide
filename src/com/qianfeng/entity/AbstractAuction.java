@@ -15,8 +15,8 @@ public abstract class AbstractAuction implements java.io.Serializable {
 
 	private int auctionID;
 	private String auctionName;
-	private double auctionStartPrice;
-	private double auctionUpset;
+	private Double auctionStartPrice;
+	private Double auctionUpset;
 	private Timestamp auctionStartTime;
 	private Timestamp auctionEndTime;
 	private String auctionDESC;
@@ -37,7 +37,7 @@ public abstract class AbstractAuction implements java.io.Serializable {
 	}
 
 	public AbstractAuction(int auctionID, String auctionName,
-			double auctionStartPrice, double auctionUpset,
+			Double auctionStartPrice, Double auctionUpset,
 			Timestamp auctionStartTime, Timestamp auctionEndTime,
 			String auctionDESC, String auctionPICPath, Timestamp createTime,
 			Timestamp updateTime, Set auctionrecords) {
@@ -72,25 +72,25 @@ public abstract class AbstractAuction implements java.io.Serializable {
 
 
 
-	public double getAuctionStartPrice() {
+	public Double getAuctionStartPrice() {
 		return auctionStartPrice;
 	}
 
 
 
-	public void setAuctionStartPrice(double auctionStartPrice) {
+	public void setAuctionStartPrice(Double auctionStartPrice) {
 		this.auctionStartPrice = auctionStartPrice;
 	}
 
 
 
-	public double getAuctionUpset() {
+	public Double getAuctionUpset() {
 		return auctionUpset;
 	}
 
 
 
-	public void setAuctionUpset(double auctionUpset) {
+	public void setAuctionUpset(Double auctionUpset) {
 		this.auctionUpset = auctionUpset;
 	}
 
