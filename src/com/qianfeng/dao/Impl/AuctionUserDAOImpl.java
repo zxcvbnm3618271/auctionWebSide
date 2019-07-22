@@ -37,7 +37,7 @@ public class AuctionUserDAOImpl implements AuctionUserDAO {
 			while (resultSet.next()) {
 				auctionUser = new AuctionUser();
 				auctionUser.setUserID(resultSet.getInt("USERID"));
-				
+
 				auctionUser.setUserName(resultSet.getString("USERNAME"));
 				auctionUser
 						.setUserPassWord(resultSet.getString("USERPASSWORD"));

@@ -34,23 +34,22 @@ public class AuctionAddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		AuctionBIZ auctionBIZ=new AuctionBIZImpl();
+		AuctionBIZ auctionBIZ = new AuctionBIZImpl();
 		String auctionState;
+		auctionState = auctionBIZ.auctionAdd(getServletConfig(), req, resp);
 		try {
-			auctionState = auctionBIZ.auctionAdd(getServletConfig(), req, resp);
-			req.getRequestDispatcher("AuctionListServlet?msg="+auctionState+"").forward(req, resp);
+			req.getRequestDispatcher(
+					"AuctionListServlet?msg=" + auctionState + "").forward(req,
+					resp);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
+
 	}
 
 	public static void main(String[] args) {
-	
 
-		
 	}
 
 }

@@ -3,7 +3,7 @@
     <wb-module deploy-name="auction">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="/auction"/>
         <property name="java-output-path" value="/auction/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="/auction_ssh"/>
     </wb-module>
 </project-modules>
