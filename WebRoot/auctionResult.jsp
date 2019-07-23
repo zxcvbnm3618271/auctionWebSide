@@ -64,7 +64,7 @@
 				<c:forEach items="${requestScope.map['notend'] }" var="notend">
 					<ul class="rows">
 						<li>${notend.auctionName }</li>
-						<li>${notend.auctionStartTime}</li>
+						<li>${notend.auctionStartTime }</li>
 						<li>${notend.auctionEndTime }</li>
 						<li>${notend.auctionStartPrice }</li>
 						<li><img src="<%=basePath %>upload/${notend.auctionPICPath }"

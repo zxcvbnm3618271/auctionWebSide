@@ -23,14 +23,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript">
 		<%
-			String msg = request.getParameter("msg");
+			String msg = (String)request.getAttribute("msg");
 			if(AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS.getValue().equals(msg)){
 				out.print("alert('登录成功');");
 			}
 			if(AuctionLoginStateEnum.AUCTION_LOGIN_FAIL.getValue().equals(msg)){
 				out.print("alert('用户名密码错误，请重新登录');");
 			}
-			if(AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATECODE_ERROR.getValue().equals(msg)){
+			if(AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATACODE_ERROR.getValue().equals(msg)){
 				out.print("alert('验证码错误，请重新输入');");
 			}
 		%>	
@@ -52,17 +52,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      INPUT 也是以键值的方式去提交  提交数据到 请求行中
    
      -->
-     <form action="AuctionLoginServlet" method="post">
+     <form action="login.action" method="post">
     <div class="login">
       <dl>
         <dt class="blues">用户登陆</dt>
         <dd><label for="name">用户名：</label>
-        	<input type="text" name="username01" class="inputh" value="${username}" id="name"/></dd>
+        	<input type="text" name="userName" class="inputh" value="${username}" id="name"/></dd>
         <dd><label for="password">密 码：</label>
-        	<input type="password" name="userpassword01" class="inputh" value="${userpassword}" id="password"/></dd>
+        	<input type="password" name="userPassWord" class="inputh" value="${userpassword}" id="password"/></dd>
         <dd>
            <label class="lf" for="passwords">验证码：</label>
-           <input type="text" name="inputCode" class="inputh inputs lf" value="验证码" id="passwords"/>
+           <input type="text" name="userInputCode" class="inputh inputs lf" value="验证码" id="passwords"/>
            <span class="wordp lf"><img id="validateCode" src="Number.jsp" width="96" height="27" alt="" /></span>
            <span class="blues lf"><a id="changeCode" href="javascript:void(0);" title="">看不清</a></span>
         </dd>

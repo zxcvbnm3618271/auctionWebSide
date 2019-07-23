@@ -9,72 +9,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qianfeng.biz.AuctionBIZ;
-import com.qianfeng.biz.Impl.AuctionBIZImpl;
+import com.qianfeng.bizimpl.AuctionBIZImpl;
 import com.qianfeng.entity.Auction;
 
 public class AuctionFindByIdServlet extends HttpServlet {
 
 	/**
-	 * Constructor of the object.
-	 */
-	public AuctionFindByIdServlet() {
-		super();
-	}
-
-	/**
-	 * Destruction of the servlet. <br>
-	 */
-	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
-	}
-
-	/**
 	 * The doGet method of the servlet. <br>
-	 * 
+	 *
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request
-	 *            the request send by the client to the server
-	 * @param response
-	 *            the response send by the server to the client
-	 * @throws ServletException
-	 *             if an error occurred
-	 * @throws IOException
-	 *             if an error occurred
+	 * @param request the request send by the client to the server
+	 * @param response the response send by the server to the client
+	 * @throws ServletException if an error occurred
+	 * @throws IOException if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		doPost(request, response);
+		
 	}
 
 	/**
 	 * The doPost method of the servlet. <br>
+	 *
+	 * This method is called when a form has its tag value method equals to post.
 	 * 
-	 * This method is called when a form has its tag value method equals to
-	 * post.
-	 * 
-	 * @param request
-	 *            the request send by the client to the server
-	 * @param response
-	 *            the response send by the server to the client
-	 * @throws ServletException
-	 *             if an error occurred
-	 * @throws IOException
-	 *             if an error occurred
+	 * @param request the request send by the client to the server
+	 * @param response the response send by the server to the client
+	 * @throws ServletException if an error occurred
+	 * @throws IOException if an error occurred
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+	public void doPost(HttpServletRequest request, HttpServletResponse response){
 
-		String auctionId = request.getParameter("auctionid");
-		AuctionBIZ auctionBIZ = new AuctionBIZImpl();
+		String auctionId=request.getParameter("auctionid");
+		AuctionBIZ auctionBIZ=new AuctionBIZImpl();
 		try {
-			Auction auction = auctionBIZ.auctionFindById(Integer
-					.parseInt(auctionId));
-			// request.setAttribute("auctionid", auction.getAuctionID());
+			Auction auction=auctionBIZ.auctionFindById(Integer.parseInt(auctionId));
 			request.setAttribute("auction", auction);
-			request.getRequestDispatcher("addAuction.jsp").forward(request,
-					response);
+			request.getRequestDispatcher("addAuction.jsp").forward(request, response);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,16 +59,7 @@ public class AuctionFindByIdServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Initialization of the servlet. <br>
-	 * 
-	 * @throws ServletException
-	 *             if an error occurs
-	 */
-	public void init() throws ServletException {
-		// Put your code here
+		
 	}
 
 }

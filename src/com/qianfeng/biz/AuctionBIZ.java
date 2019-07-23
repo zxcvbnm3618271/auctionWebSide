@@ -4,42 +4,27 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qianfeng.entity.Auction;
 
 public interface AuctionBIZ {
-	/**
-	 * @Descript
-	 * @param pageIndex
-	 * @param pageNum
-	 * @return
-	 */
-	List<Auction> auctionListByPage(BigDecimal pageIndex, BigDecimal pageNum);
+ List<Auction>auctionListByPage(BigDecimal pageIndex,BigDecimal pageNum);
+ BigDecimal getAllcount();
+ String auctionAdd(ServletConfig config,HttpServletRequest request,HttpServletResponse response);
 
-	/**
-	 * 
-	 * @return
-	 */
-
-	BigDecimal getAllCount();
-
-	String auctionAdd(ServletConfig config, HttpServletRequest request,
-			HttpServletResponse response);
-
-	Auction auctionFindById(int auctionId);
-
-	String auctionUpdate(ServletConfig config, HttpServletRequest request,
-			HttpServletResponse response);
-
-	int auctionDelByID(int auctionid);
-
-	List<Auction> searchEndAuctionList();
-
-	List<Auction> searchNotEndAuctionList();
-
-	List<Auction> searchAuctionList(String auctionName,
-			String auctionStartTime,String auctionEndTime, String auctionStartPrice);
+ Auction auctionFindById(int auctionid);
+ String auctionUpdate(ServletConfig config,HttpServletRequest request,HttpServletResponse response);
+ int auctionDelByID(int auctionID);
+ 
+ List<Auction>serchEndAuctionList();
+ List<Auction>serchNotEndAuctionList();
+ List<Auction>searchAuctionList(String auctionName,String auctionStartTime,
+		 String auctionEndTime,String auctionStartPrice);
+ 
+ 
+ 
+ 
 }
+

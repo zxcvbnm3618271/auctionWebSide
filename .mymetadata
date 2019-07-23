@@ -2,7 +2,7 @@
 <project-module
   type="WEB"
   name="auction_ssh"
-  id="myeclipse.1563160663780"
+  id="myeclipse.1563160666291"
   context-root="/auction_ssh"
   j2ee-spec="6.0"
   archive="auction_ssh.war">

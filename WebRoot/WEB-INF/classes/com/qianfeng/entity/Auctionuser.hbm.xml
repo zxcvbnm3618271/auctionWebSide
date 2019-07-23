@@ -20,46 +20,14 @@
                 <comment>用户密码</comment>
             </column>
         </property>
-        <property name="userCardNo" type="java.lang.String">
-            <column name="USERCARDNO" length="20">
-                <comment>用户身份证号</comment>
-            </column>
-        </property>
-        <property name="userTel" type="java.lang.String">
-            <column name="USERTEL" length="20">
-                <comment>用户电话</comment>
-            </column>
-        </property>
-        <property name="userAddress" type="java.lang.String">
-            <column name="USERADDRESS" length="200">
-                <comment>用户地址</comment>
-            </column>
-        </property>
-        <property name="userPostNumber" type="java.lang.String">
-            <column name="USERPOSTNUMBER" length="6">
-                <comment>用户邮政编号</comment>
-            </column>
-        </property>
+   
         <property name="userIsAdmin" type="java.lang.Boolean">
             <column name="USERISADMIN" precision="1" scale="0">
                 <comment>用户是否是管理员，0是竞拍者，1是管理员，默认值是0</comment>
             </column>
         </property>
-        <property name="userQuestion" type="java.lang.String">
-            <column name="USERQUESTION" length="100">
-                <comment>用户找回密码的问题</comment>
-            </column>
-        </property>
-        <property name="userAnswer" type="java.lang.String">
-            <column name="USERANSWER" length="100">
-                <comment>用户找回密码答案</comment>
-            </column>
-        </property>
-        <property name="createTime" type="java.sql.Timestamp">
-            <column name="CREATETIME" length="19" />
-        </property>
-        <property name="updateTime" type="java.sql.Timestamp">
-            <column name="UPDATETIME" length="19" />
-        </property>
+        
+       
+       
     </class>
 </hibernate-mapping>

@@ -1,3 +1,4 @@
+<%@page import="com.sun.net.httpserver.Authenticator.Success"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -19,6 +20,7 @@
 
 	$(function(){
 		$("#showError").hide();
+		
 		$("#saleForm").submit(function(){
 			//每次竞拍最大价格
 			var maxPrice=$("#details ul:first li:eq(1)").text();
@@ -45,30 +47,34 @@
 	});
 
 </script>
-<script type="text/javascript">
-	<%
-String pageIndex=request.getParameter("pageIndex");
-String msg=request.getParameter("msg");
-if("success".equals(msg))
-{
-	out.print("alert('竞拍成功')");
-}else if("error".equals(msg)){
-out.print("alert('竞拍失败')");
-}
- %>
+
+<script type="text/javascript" >
+<%
+String pageIndex=request.getParameter("pageIndex"); 
+String msg = request.getParameter("msg");
+			if ("success".equals(msg)) {
+				out.print("alert('竞拍成功');");
+			}
+			else if ("error".equals(msg)) {
+				out.print("alert('竞拍失败');");
+			}
+			
+			
+%>
 </script>
 </head>
+
 <body>
 	<div class="wrap">
 		<!-- main begin-->
 		<div class="sale">
 			<h1 class="lf">在线拍卖系统</h1>
-			<c:if test="${sessionScope.user != null}">
+			<c:if test="${user != null}">
 					<div class="logout right">
 						<a href="AuctionLogoutServlet" title="注销">注销</a>
 					</div>
 				</c:if>
-				<c:if test="${sessionScope.user == null}">
+				<c:if test="${user == null}">
 					<div class="logout right">
 						<a href="login.jsp" title="登录">登录</a>
 					</div>
@@ -101,7 +107,7 @@ out.print("alert('竞拍失败')");
 		</div>
 		<div class="cl"></div>
 		<div class="top10 salebd">
-			<form action="AuctionRecordAddServlet?auctionId=${AuctionObj.auctionID }&pageIndex=<%=pageIndex%>"
+			<form action="AuctionRecordAddServlet?pageIndex=<%=pageIndex%>"
 				method="post" id="saleForm">
 				<p>
 					<label for="sale">出价：</label> <input name="auctionPrice"
@@ -109,9 +115,10 @@ out.print("alert('竞拍失败')");
 						type="submit" value="竞 拍" class="spbg buttombg f14  sale-buttom" 
 						/>
 						<input name="auctionid" value="${AuctionObj.auctionID}" style="display:none;">
-						<input name="userid" value="${sessionScope.user.userID}" style="display:none;">
-						
+				
+				        <input name="userid" value="${sessionScope.user.userID}" style="display:none;">
 				</p>
+				
 			</form>
 			<p class="f14 red" id="showError">不能低于最高竞拍价</p>
 

@@ -6,7 +6,8 @@ import com.qianfeng.entity.AuctionRecord;
 
 public interface AuctionRecordBIZ {
 
-	List<AuctionRecord> findAuctionRecordByAuctionId(int auctionid);
+	List<AuctionRecord> findAuctionRecordByAuctionId(int auctionID);
+
 	int auctionRecordAdd(AuctionRecord auctionRecord);
-	
+
 }

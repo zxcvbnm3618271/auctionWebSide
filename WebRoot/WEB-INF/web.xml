@@ -5,18 +5,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   <display-name></display-name>
-  <!-- 每个servlet文件都必须注册到WEB容器中 -->
+  
+<!--每一个servlet文件都必须要注册到web容器中  -->
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>AuctionLoginServlet</servlet-name>
-    <!--  如何保证文件地址一定正确,可以摁住ctrl+点击-->
+    
+    <!--如何保证文件地址一定正确 可以按住CTRL 鼠标点击 跳转进入  -->
     <servlet-class>com.qianfeng.servlet.AuctionLoginServlet</servlet-class>
   </servlet>
-  
   <servlet>
-  <servlet-name>AuctionListServlet</servlet-name>
-  <servlet-class>com.qianfeng.servlet.AuctionListServlet</servlet-class>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AuctionListServlet</servlet-name>
+    <servlet-class>com.qianfeng.servlet.AuctionListServlet</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -24,17 +27,18 @@
     <servlet-name>AuctionLogoutServlet</servlet-name>
     <servlet-class>com.qianfeng.servlet.AuctionLogoutServlet</servlet-class>
   </servlet>
-<servlet>
-<servlet-name>AuctionAddServlet</servlet-name>
-<servlet-class>com.qianfeng.servlet.AuctionAddServlet</servlet-class>
-</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AuctionAddServlet</servlet-name>
+    <servlet-class>com.qianfeng.servlet.AuctionAddServlet</servlet-class>
+  </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>AuctionFindByIdServlet</servlet-name>
     <servlet-class>com.qianfeng.servlet.AuctionFindByIdServlet</servlet-class>
   </servlet>
-  
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
@@ -50,8 +54,8 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>auctionResultServlet</servlet-name>
-    <servlet-class>com.qianfeng.servlet.auctionResultServlet</servlet-class>
+    <servlet-name>AuctionResultServlet</servlet-name>
+    <servlet-class>com.qianfeng.servlet.AuctionResultServlet</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -68,8 +72,8 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>SearchAuctionServlet</servlet-name>
-    <servlet-class>com.qianfeng.servlet.SearchAuctionServlet</servlet-class>
+    <servlet-name>AuctionSearchServlet</servlet-name>
+    <servlet-class>com.qianfeng.servlet.AuctionSearchServlet</servlet-class>
   </servlet>
 
 
@@ -78,25 +82,26 @@
 
 
 
-  
-<!-- 一个servlet可以有N个文件映射的地址 -->
+
+
+
+
+<!-- 一个servlet可以有N个文件映射的地址  -->
   <servlet-mapping>
     <servlet-name>AuctionLoginServlet</servlet-name>
     <url-pattern>/AuctionLoginServlet</url-pattern>
   </servlet-mapping>
- 
- <servlet-mapping>
- <servlet-name>AuctionListServlet</servlet-name>
- <url-pattern>/AuctionListServlet</url-pattern>
- </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AuctionListServlet</servlet-name>
+    <url-pattern>/AuctionListServlet</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AuctionLogoutServlet</servlet-name>
     <url-pattern>/AuctionLogoutServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
-  <servlet-name>AuctionAddServlet</servlet-name>
-  <url-pattern>/AuctionAddServlet</url-pattern>
+    <servlet-name>AuctionAddServlet</servlet-name>
+    <url-pattern>/AuctionAddServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AuctionFindByIdServlet</servlet-name>
@@ -111,8 +116,8 @@
     <url-pattern>/AuctionDelByIdServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>auctionResultServlet</servlet-name>
-    <url-pattern>/auctionResultServlet</url-pattern>
+    <servlet-name>AuctionResultServlet</servlet-name>
+    <url-pattern>/AuctionResultServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AuctionRecordServlet</servlet-name>
@@ -123,24 +128,31 @@
     <url-pattern>/AuctionRecordAddServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SearchAuctionServlet</servlet-name>
-    <url-pattern>/SearchAuctionServlet</url-pattern>
+    <servlet-name>AuctionSearchServlet</servlet-name>
+    <url-pattern>/AuctionSearchServlet</url-pattern>
   </servlet-mapping>
-  
-  
+  <!--  
   <filter>
-  <filter-name>FileFilter</filter-name>
-  <filter-class>com.qianfeng.filter.FileFilter</filter-class>
-  </filter>
+    <filter-name>FileFilter</filter-name>
+    <filter-class>com.qianfeng.filter.FileFilter</filter-class>
+  </filter>	
   
   <filter-mapping>
-  <filter-name>FileFilter</filter-name>
-  <url-pattern>/*</url-pattern>
+    <filter-name>FileFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  
-  
+  -->
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-</web-app>
+  <filter>
+  	<filter-name>struts2</filter-name>
+  	<filter-class>
+  		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+  	</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>struts2</filter-name>
+  	<url-pattern>*.action</url-pattern>
+  </filter-mapping></web-app>

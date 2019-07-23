@@ -2,6 +2,8 @@ package com.qianfeng.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,13 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qianfeng.biz.AuctionBIZ;
-import com.qianfeng.biz.AuctionRecordBIZ;
 import com.qianfeng.bizimpl.AuctionBIZImpl;
-import com.qianfeng.bizimpl.AuctionRecordBIZImpl;
 import com.qianfeng.entity.Auction;
-import com.qianfeng.entity.AuctionRecord;
+import com.qianfeng.vo.PageVO;
 
-public class AuctionRecordServlet extends HttpServlet {
+public class AuctionSearchServlet extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -32,6 +32,7 @@ public class AuctionRecordServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		doPost(request, response);
+		
 	}
 
 	/**
@@ -44,23 +45,34 @@ public class AuctionRecordServlet extends HttpServlet {
 	 * @throws ServletException if an error occurred
 	 * @throws IOException if an error occurred
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response){
+	public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-		String auctionid=request.getParameter("auctionId");
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String auctionName=request.getParameter("auctionName");
+		String auctionStartTime=request.getParameter("auctionStartTime");
+		String auctionEndTime=request.getParameter("auctionEndTime");
+		String auctionStartPrice=request.getParameter("auctionStartPrice");
 		
 		AuctionBIZ auctionBIZ=new AuctionBIZImpl();
-		AuctionRecordBIZ auctionRecordBIZ=new AuctionRecordBIZImpl();
-	
+		
+		
 		try {
-			Auction auction=auctionBIZ.auctionFindById(Integer.parseInt(auctionid));
-
-			List<AuctionRecord> recordList=auctionRecordBIZ.findAuctionRecordByAuctionId(Integer.parseInt(auctionid));
-			request.setAttribute("AuctionObj", auction);
-			request.setAttribute("record_list", recordList);
-			request.getRequestDispatcher("auctionDetail.jsp").forward(request, response);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			List<Auction> auctionList=auctionBIZ.searchAuctionList(auctionName, auctionStartTime, auctionEndTime, auctionStartPrice);
+			PageVO<Auction> pageVO=new PageVO();
+			
+			pageVO.setLists(auctionList);
+			pageVO.setPageIndex(new BigDecimal(1));
+			pageVO.setPageNum(new BigDecimal(5));
+			pageVO.setTotal(new BigDecimal(99999));
+			pageVO.setEndPage(new BigDecimal(1));
+			
+			request.setAttribute("auctionPageInfo", pageVO);
+			request.getRequestDispatcher("auctionList.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,6 +80,8 @@ public class AuctionRecordServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 

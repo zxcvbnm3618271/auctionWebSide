@@ -1,17 +1,24 @@
 package com.qianfeng.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+ 
 
 
+public class PageVO<T> implements Serializable {
 
-public class pageVO<T> {
-	//分页集合容器
 	private List<T> lists;
 	private BigDecimal pageIndex;
 	private BigDecimal pageNum;
 	private BigDecimal total;
 	private BigDecimal endPage;
+	@Override
+	public String toString() {
+		return "PageVO [lists=" + lists + ", pageIndex=" + pageIndex
+				+ ", pageNum=" + pageNum + ", total=" + total + ", endPage="
+				+ endPage + "]";
+	}
 	public List<T> getLists() {
 		return lists;
 	}
@@ -42,11 +49,6 @@ public class pageVO<T> {
 	public void setEndPage(BigDecimal endPage) {
 		this.endPage = endPage;
 	}
-	@Override
-	public String toString() {
-		return "pageVO [lists=" + lists + ", pageIndex=" + pageIndex
-				+ ", pageNum=" + pageNum + ", total=" + total + ", endPage="
-				+ endPage + "]";
-	}
+	
 	
 }

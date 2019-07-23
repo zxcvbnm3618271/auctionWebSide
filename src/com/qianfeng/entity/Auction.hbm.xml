@@ -51,11 +51,6 @@
         <property name="updateTime" type="java.sql.Timestamp">
             <column name="UPDATETIME" length="19" />
         </property>
-       <!--  <set name="auctionrecords" inverse="true">
-            <key>
-                <column name="AUCTIONID" />
-            </key>
-            <one-to-many class="entity.Auctionrecord" />
-        </set> -->
+       
     </class>
 </hibernate-mapping>

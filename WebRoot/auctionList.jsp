@@ -1,7 +1,5 @@
-<%@page import="java.math.BigDecimal"%>
-<%@page import="com.qianfeng.enums.AuctionStateEnum"%>
-<%@page import="com.qianfeng.servlet.AuctionListServlet"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page  import="com.qianfeng.enums.AuctionStateEnum" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -16,49 +14,52 @@
 <title>无标题文档</title>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
 <script type="text/javascript">
+
 	function goToPage(pageIndex) {
 		document.forms[1].action = document.forms[1].action + "?pageIndex="
-				+ pageIndex + "&pageNum=${auctionPageInfo.pageNum}";
+				+ pageIndex+"&pageNum=${auctionPageInfo.pageNum}";
 		document.forms[1].submit();
 	}
-	//在使用ajax的时候 要导入jquery的包
-	function delAuction(arg) {
-		var $usarg = $(arg);
-		//获取自定义属性
-		var auctionid = $usarg.attr("auctionid");
-		auctionid = {
-			"auctionid" : auctionid
-		};
-		//删除一定要做确认的操作
-		if (confirm("您确定要删除吗?")) {
-			$.ajax({
-				url : "AuctionDelByIdServlet",
-				data : auctionid,
-				dataType : "json",
-				success : function(data) {
-					if (data) {
-						$usarg.parent().parent().remove();
-					}
-				},
-				error : function() {
-					alert("删除失败");
-				}
-			});
-		}
+	/*ajas(json)  ajax(xml)*/
+	function delAuction(arg){
+	   var $usarg=$(arg);
+	   var auctionid=$usarg.attr("auctionid");
+	   auctionid={
+	     "auctionid":auctionid
+	   };
+	   if(confirm("你确认要删除吗？")){
+	     $.ajax({
+	        url:"AuctionDelByIdServlet",
+	        data:auctionid,
+	        dataType:"json",
+	        success:function(data){
+	           if(data){
+	           
+	           $usarg.parent().parent().remove();
+	           }
+	          
+	        },
+	        error:function(){
+	           alert("删除失败请重试");
+	        }
+	     });
+	   }
 	}
-//通过参数重传的方式刷新页面,缺点是响应速度没有局部刷新快,优点是易于实现
-	function ChangepageNum(arg) {
-	
-		location.href = "AuctionListServlet?pageIndex=1&pageNum="
-				+ arg + "";
+	function changePageNum(arg){
+	  location.href="AuctionListServlet?pageIndex=${auctionPageInfo.pageIndex}&pageNum="
+	            +arg+"";
 	}
-	//find这个函数在jquery中用的非常多可以解决一些被封装的元素的样式修改
-	$(function() {
-		$("#pagenum").find("option[value=${auctionPageInfo.pageNum}]").attr(
-				"selected", true);
-	})
+	//实现元素的回显 要等文档流加载结束之后 再进行元素相关的回显
+	//文档流加载完成后再执行这个函数
+	$(function(){
+	//find这个函数在JQUERY 用的非常多 可以解决一些已经被封装的元素的样式的修改比如easyui等等
+	  $("#pagenum").find("option[value=${auctionPageInfo.pageNum}]").attr(
+	          "selected",true);
+	});
 </script>
 
 <script type="text/javascript">
@@ -66,21 +67,25 @@
 <%String msg = request.getParameter("msg");
 			if (AuctionStateEnum.AUCTION_ADD_SUCCESS.getValue().equals(msg)) {
 				out.print("alert('添加成功');");
-			} else if (AuctionStateEnum.AUCTION_ADD_FAIL.getValue().equals(msg)) {
-				out.print("alert('添加失败');");
-			} else if (AuctionStateEnum.AUCTION_UPDATE_SUCCESS.getValue()
-					.equals(msg)) {
+			}
+			else if (AuctionStateEnum.AUCTION_UPDATE_SUCCESS.getValue().equals(msg)) {
 				out.print("alert('编辑成功');");
-			} else if (AuctionStateEnum.AUCTION_UPDATE_FAIL.getValue().equals(
-					msg)) {
+			}
+			else if (AuctionStateEnum.AUCTION_ADD_FAIL.getValue().equals(msg)) {
+				out.print("alert('添加失败');");
+			}
+			else if (AuctionStateEnum.AUCTION_UPDATE_FAIL.getValue().equals(msg)) {
 				out.print("alert('编辑失败');");
-			}%>
+			}
+			%>
+			
+			
 	
 </script>
 </head>
 
 <body>
-	<form action="SearchAuctionServlet" method="post">
+	<form action="AuctionSearchServlet" method="post">
 		<div class="forms">
 			<label for="name">名称</label> <input name="auctionName" type="text"
 				class="nwinput" id="name" /> <label for="time">开始时间</label> <input
@@ -94,7 +99,7 @@
 				<input type="button" onclick="location='addAuction.jsp'" value="发布"
 					class="spbg buttombg f14  sale-buttom buttomb" />
 			</c:if>
-			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="auctionResultServlet"><b>查看竞拍结果</b>
+			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="AuctionResultServlet"><b>查看竞拍结果</b>
 			</a>
 		</div>
 	</form>
@@ -134,13 +139,10 @@
 						<li>${auction.auctionStartPrice }</li>
 						<li class="borderno red"><c:if
 								test="${sessionScope.user.userIsAdmin==true }">
-								<a
-									href="AuctionFindByIdServlet?auctionid=${auction.auctionID}&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
-								<a auctionid="${auction.auctionID}" onclick="delAuction(this)"
-									href="#">删除</a>
-							</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
-								<a
-									href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
+								<a href="AuctionFindByIdServlet?auctionid=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
+          	<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>	
+          	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
+								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
 							</c:if></li>
 					</ul>
 				</c:forEach>
@@ -148,13 +150,14 @@
 					int count = 0;
 				%>
 				<div class="page">
-					<select id="pagenum" onchange="ChangepageNum(this.value)">
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-					</select> <a href="javascript:goToPage(1)">首页</a>
+				<select id="pagenum" onchange="changePageNum(this.value)">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				</select>
+					<a href="javascript:goToPage(1)">首页</a>
 					<c:if test="${auctionPageInfo.pageIndex!=1}">
 						<a href="javascript:goToPage(${auctionPageInfo.pageIndex-1 })">上一页</a>
 					</c:if>
