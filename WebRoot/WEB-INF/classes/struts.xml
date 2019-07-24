@@ -2,10 +2,35 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
- <package name="auctionuser" extends="struts-default" namespace="/">
-    <action name="login" class="com.qianfeng.action.AuctionUserAction" method="login" >
-    <result name="success">/login.jsp</result>
-      <result name="input">/login.jsp</result>
-    </action>
-  </package>
+	<package name="auctionuser" extends="struts-default" namespace="/">
+		<action name="login" class="com.qianfeng.action.AuctionUserAction"
+			method="login">
+			<!-- result默认类型是转发 这里是重定向 -->
+			<result name="success" type="redirectAction">
+				<!-- 访问action的地址 -->
+				<param name="actionName">auctionListByPage</param>
+				<!-- 访问包名地址 -->
+				<param name="namespace">/</param>
+				<!-- action中对应的函数 -->
+				<param name="method">auctionListByPage</param>
+				<!-- -->
+				<param name="msg">${msg}</param>
+			</result>
+			<result name="input">/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="auction" extends="struts-default,json-default" namespace="/">
+		<action name="auctionListByPage" class="com.qianfeng.action.AuctionAction"
+			method="auctionListByPage">
+			<result name="success">/auctionList.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		
+		<action name="auctionDel" class="com.qianfeng.action.AuctionAction" method="del">
+		<result type="json">
+		<param name="root">delete</param>
+		</result>
+		</action>
+	</package>
 </struts>    
