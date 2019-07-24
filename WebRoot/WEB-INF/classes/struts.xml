@@ -27,6 +27,7 @@
 			<result name="input">/error.jsp</result>
 		</action>
 		
+<<<<<<< HEAD
 			
 		<action name="auctionAdd" class="com.qianfeng.action.AuctionAction"
 			method="auctionAdd">
@@ -61,4 +62,12 @@
 	
 		
 	
+=======
+		<action name="auctionDel" class="com.qianfeng.action.AuctionAction" method="del">
+		<result type="json">
+		<param name="root">delete</param>
+		</result>
+		</action>
+	</package>
+>>>>>>> dcd0b10f3e30ae8e1705ce8eb3435da4cd175c04
 </struts>    
