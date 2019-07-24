@@ -27,13 +27,13 @@
 	/*ajas(json)  ajax(xml)*/
 	function delAuction(arg){
 	   var $usarg=$(arg);
-	   var auctionid=$usarg.attr("auctionid");
+	   var auctionid=$usarg.attr("auctionID");
 	   auctionid={
-	     "auctionid":auctionid
+	     "auctionID":auctionid
 	   };
 	   if(confirm("你确认要删除吗？")){
 	     $.ajax({
-	        url:"AuctionDelByIdServlet",
+	        url:"auctionDel.action",
 	        data:auctionid,
 	        dataType:"json",
 	        success:function(data){
@@ -50,7 +50,7 @@
 	   }
 	}
 	function changePageNum(arg){
-	  location.href="AuctionListServlet?pageIndex=${auctionPageInfo.pageIndex}&pageNum="
+	  location.href="auctionListByPage.action?pageIndex=${auctionPageInfo.pageIndex}&pageNum="
 	            +arg+"";
 	}
 	//实现元素的回显 要等文档流加载结束之后 再进行元素相关的回显
@@ -85,7 +85,7 @@
 </head>
 
 <body>
-	<form action="AuctionSearchServlet" method="post">
+	<form action="AuctionSearch.action" method="post">
 		<div class="forms">
 			<label for="name">名称</label> <input name="auctionName" type="text"
 				class="nwinput" id="name" /> <label for="time">开始时间</label> <input
@@ -105,7 +105,7 @@
 	</form>
 
 
-	<form method="post" action="AuctionListServlet">
+	<form method="post" action="auctionListByPage.action">
 		<div class="wrap">
 			<!-- main begin-->
 			<div class="sale">
@@ -139,7 +139,7 @@
 						<li>${auction.auctionStartPrice }</li>
 						<li class="borderno red"><c:if
 								test="${sessionScope.user.userIsAdmin==true }">
-								<a href="AuctionFindByIdServlet?auctionid=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
+								<a href="auctionDel.action?auctionid=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
           	<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>	
           	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
 								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>

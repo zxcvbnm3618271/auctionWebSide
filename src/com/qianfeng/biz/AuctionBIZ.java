@@ -1,5 +1,6 @@
 package com.qianfeng.biz;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,8 +13,12 @@ import com.qianfeng.entity.Auction;
 public interface AuctionBIZ {
  List<Auction>auctionListByPage(BigDecimal pageIndex,BigDecimal pageNum);
  BigDecimal getAllcount();
- String auctionAdd(ServletConfig config,HttpServletRequest request,HttpServletResponse response);
+ 
+ 
+ String auctionAdd(File userFile,String fileName,String hostPath,Auction auction);
 
+ 
+ 
  Auction auctionFindById(int auctionid);
  String auctionUpdate(ServletConfig config,HttpServletRequest request,HttpServletResponse response);
  int auctionDelByID(int auctionID);

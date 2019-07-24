@@ -6,10 +6,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.qianfeng.biz.AuctionUserBIZ;
 import com.qianfeng.bizimpl.AuctionUserBIZImpl;
-import com.qianfeng.entity.AuctionUser;
+import com.qianfeng.entity.AuctionUser;  
+import com.qianfeng.enums.AuctionLoginStateEnum;
 
 public class AuctionUserAction extends ActionSupport implements
-		ModelDriven<AuctionUser> {
+                 ModelDriven<AuctionUser> {
 
 	private AuctionUser auctionUser = new AuctionUser();
 	private String userInputCode;
@@ -23,7 +24,14 @@ public class AuctionUserAction extends ActionSupport implements
 				(String) ServletActionContext.getRequest().getSession()
 						.getAttribute("numrand"),
 				ServletActionContext.getRequest());
-		return SUCCESS;
+		if (msg.equals(AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATACODE_ERROR.getValue())) {
+			return INPUT;
+		}else if (msg.equals(AuctionLoginStateEnum.AUCTION_LOGIN_FAIL.getValue())) {
+			return INPUT;
+		}else {
+			return SUCCESS;
+		}
+		
 	}
 
 	@Override

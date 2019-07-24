@@ -39,7 +39,7 @@ function updateAuction(){
 </script>
 </head>
 <body>
-	<form id="postForm" action="AuctionAddServlet" enctype="multipart/form-data"
+	<form id="postForm" action="auctionAdd.action" enctype="multipart/form-data"
 		method="post">
 		<div class="wrap">
 			<!-- main begin-->
@@ -60,7 +60,7 @@ function updateAuction(){
 				<h1 class="blues">拍卖品信息</h1>
 				<dl>
 					<input style="display: none;" type="text"
-						onblur="checkAuctionName()" name="auctionId" class="inputh lf"
+						onblur="checkAuctionName()" name="auctionID" class="inputh lf"
 						value="${auction.auctionID}" />
 					<dd>
 						<label>名称：</label> <input type="text" onblur="checkAuctionName()"
@@ -70,24 +70,24 @@ function updateAuction(){
 					</dd>
 					<dd>
 						<label>起拍价：</label> <input type="text" onblur="checkStartPrice()"
-							name="startPrice" class="inputh lf"
+							name="auctionStartPrice" class="inputh lf"
 							value="${auction.auctionStartPrice}" />
 						<div id="startPriceid" class="lf red laba">必须为数字</div>
 					</dd>
 					<dd>
-						<label>底价：</label> <input type="text" name="upset"
+						<label>底价：</label> <input type="text" name="auctionUpset"
 							class="inputh lf" onblur="checkUpset()"
 							value="${auction.auctionUpset}" />
 						<div id="upsetid" class="lf red laba">必须为数字</div>
 					</dd>
 					<dd>
-						<label>开始时间：</label> <input type="text" name="startTime"
+						<label>开始时间：</label> <input type="text" name="auctionStartTime"
 							class="inputh lf" value="${auction.auctionStartTime}" />
 						<div id="startTimeid" class="lf red laba">格式：2010-05-05
 							12:30:00</div>
 					</dd>
 					<dd>
-						<label>结束时间：</label> <input type="text" name="endTime"
+						<label>结束时间：</label> <input type="text" name="auctionEndTime"
 							class="inputh lf" value="${auction.auctionEndTime}" />
 						<div id="endTimeid" class="lf red laba">格式：2010-05-06
 							16:30:00</div>
@@ -99,14 +99,14 @@ function updateAuction(){
 								src="<%=basePath %>upload/${auction.auctionPICPath}" width="100"
 								height="100" />
 						</div>
-						<input id="pic" name="pic" type="file" class="offset10 lf" onchange="previewFile()" /> <input
+						<input id="pic" name="userFile" type="file" class="offset10 lf" onchange="previewFile()" /> <input
 							name="pic02" style="display:none;" type="text" class="offset10 lf"
 							value="${auction.auctionPICPath}" />
 						<div id="picid" class="lf red laba">请上传图片</div>
 					</dd>
 					<dd class="dds">
 						<label>描述：</label>
-						<textarea name="desc" cols="" rows="" class="textarea">${auction.auctionDESC}</textarea>
+						<textarea name="auctionDESC" cols="" rows="" class="textarea">${auction.auctionDESC}</textarea>
 					</dd>
 					<dd class="hegas">
 						<input type="submit" value="保 存"
