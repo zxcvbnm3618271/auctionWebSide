@@ -207,7 +207,7 @@ public class AuctionDAOImpl implements AuctionDAO {
 					.buildSessionFactory();
 			session=sessionFactory.openSession();
 			auctions= session
-					.createQuery("from AuctionUser  where auctionEndTime<?")
+					.createQuery("from Auction  where auctionEndTime < ?")
 					.setDate(0, new Date()).list();
 					
 		} catch (Exception e) {
@@ -233,7 +233,7 @@ public class AuctionDAOImpl implements AuctionDAO {
 					.buildSessionFactory();
 			session=sessionFactory.openSession();
 			auctions= session
-					.createQuery("from AuctionUser  where auctionEndTime>?")
+					.createQuery("from Auction  where auctionEndTime > ?")
 					.setDate(0, new Date()).list();
 					
 		} catch (Exception e) {

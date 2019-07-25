@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-
+<!-- <constant name="struts.multipart.maxSize" value="22097152"></constant> -->
 	<package name="auctionuser" extends="struts-default" namespace="/">
 		<action name="login" class="com.qianfeng.action.AuctionUserAction"
 			method="login">
@@ -27,7 +27,6 @@
 			<result name="input">/error.jsp</result>
 		</action>
 		
-<<<<<<< HEAD
 			
 		<action name="auctionAdd" class="com.qianfeng.action.AuctionAction"
 			method="auctionAdd">
@@ -35,6 +34,26 @@
 			<param name="actionName">auctionListByPage</param>
 			<param name="namespace">/</param>
 			<param name="msg">${msg}</param>
+			</result>
+		
+			<result name="input" type="redirectAction">	
+			<param name="actionName">auctionListByPage</param>
+			<param name="namespace">/</param>
+			<param name="msg">${msg}</param>
+			</result>
+			
+		</action>
+		
+		
+		
+			
+		<action name="auctionUpdate" class="com.qianfeng.action.AuctionAction"
+			method="auctionUpdate">
+			<result name="success"  type="redirectAction">
+			<param name="actionName">auctionListByPage</param>
+			<param name="namespace">/</param>
+			<param name="msg">${msg}</param>
+			<param name="pageIndex">${pageIndex}</param>
 			</result>
 		
 			<result name="input" type="redirectAction">	
@@ -57,17 +76,62 @@
 			
 		</action>
 		
-	</package>
-	
-	
 		
-	
-=======
-		<action name="auctionDel" class="com.qianfeng.action.AuctionAction" method="del">
-		<result type="json">
-		<param name="root">delete</param>
-		</result>
+		<action name="findAuctionById" class="com.qianfeng.action.AuctionAction"
+			method="findAuctionById">
+			<result name="success">
+			  /addAuction.jsp
+			</result>
+			
+		</action>
+		
+		
+		<action name="searAuctionList" class="com.qianfeng.action.AuctionAction"
+			method="searchAuctionList">
+			<result>
+			  /auctionList.jsp
+			</result>
+			
+		</action>
+		
+		<action name="logout" class="com.qianfeng.action.AuctionAction"
+			method="logout">
+			<result>
+			  /login.jsp
+			</result>
+			
+		</action>
+		
+		
+		<action name="auctionResult" class="com.qianfeng.action.AuctionAction"
+			method="auctionResult">
+			<result>
+			  /auctionResult.jsp
+			</result>
+			
+		</action>
+		
+		
+	</package>
+
+	<package name="auctionRecord" extends="struts-default"
+	 namespace="/">
+	 
+	 <action name="auctionDetail" class="com.qianfeng.action.AuctionRecordAction"
+			method="auctionDetail">
+			<result name="success">/auctionDetail.jsp</result>
+			
+		</action>
+	 
+	 
+		<action name="auctionRecordAdd" class="com.qianfeng.action.AuctionRecordAction"
+			method="auctionRecordAdd">
+			<result name="success" type="redirectAction">
+			<param name="actionName">auctionDetail</param>
+			<param name="namespace">/</param>
+			<param name="auctionID">${auctionRecord.auction.auctionID}</param>
+			<param name="msg">${msg}</param>
+			</result>
 		</action>
 	</package>
->>>>>>> dcd0b10f3e30ae8e1705ce8eb3435da4cd175c04
 </struts>    

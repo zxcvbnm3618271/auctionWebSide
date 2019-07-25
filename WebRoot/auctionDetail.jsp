@@ -1,5 +1,5 @@
 <%@page import="com.sun.net.httpserver.Authenticator.Success"%>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -83,40 +83,40 @@ String msg = request.getParameter("msg");
 		<div class="items sg-font lf">
 			<ul class="rows">
 				<li>名称：</li>
-				<li class="borderno">${AuctionObj.auctionName }</li>
+				<li class="borderno">${auctionObj.auctionName }</li>
 			</ul>
 			<ul class="rows">
 				<li>描述：</li>
-				<li class="borderno">${AuctionObj.auctionDESC }</li>
+				<li class="borderno">${auctionObj.auctionDESC }</li>
 			</ul>
 			<ul class="rows">
 				<li>开始时间：</li>
-				<li class="borderno">${AuctionObj.auctionStartTime }</li>
+				<li class="borderno">${auctionObj.auctionStartTime }</li>
 			</ul>
 			<ul class="rows">
 				<li>结束时间：</li>
-				<li class="borderno">${AuctionObj.auctionEndTime }</li>
+				<li class="borderno">${auctionObj.auctionEndTime }</li>
 			</ul>
 			<ul class="rows border-no">
 				<li>起拍价：</li>
-				<li class="borderno" id="startPrice">${AuctionObj.auctionStartPrice }</li>
+				<li class="borderno" id="startPrice">${auctionObj.auctionStartPrice }</li>
 			</ul>
 		</div>
 		<div class="rg borders">
-			<img src="<%=basePath%>upload/${AuctionObj.auctionPICPath }" width="270" alt="" />
+			<img src="<%=basePath%>upload/${auctionObj.auctionPICPath }" width="270" alt="" />
 		</div>
 		<div class="cl"></div>
 		<div class="top10 salebd">
-			<form action="AuctionRecordAddServlet?pageIndex=<%=pageIndex%>"
+			<form action="auctionRecordAdd.action?pageIndex=<%=pageIndex%>"
 				method="post" id="saleForm">
 				<p>
 					<label for="sale">出价：</label> <input name="auctionPrice"
 						type="text" class="inputwd" id="sale" value=""/> <input
 						type="submit" value="竞 拍" class="spbg buttombg f14  sale-buttom" 
 						/>
-						<input name="auctionid" value="${AuctionObj.auctionID}" style="display:none;">
+						<input name="auction.auctionID" value="${auctionObj.auctionID}" style="display:none;">
 				
-				        <input name="userid" value="${sessionScope.user.userID}" style="display:none;">
+				        <input name="auctionUser.userID" value="${sessionScope.user.userID}" style="display:none;">
 				</p>
 				
 			</form>
@@ -125,7 +125,7 @@ String msg = request.getParameter("msg");
 		</div>
 		<div class="top10">
 			<input name="" type="button" value="刷 新" class="spbg buttombg f14" 
-			onclick="javascript:location='AuctionRecordServlet?auctionId=${AuctionObj.auctionID }&pageIndex=<%=pageIndex%>'"/>
+			onclick="javascript:location='AuctionRecordServlet?auctionId=${auctionRecordAdd.auctionID }&pageIndex=<%=pageIndex%>'"/>
 			<input name="" type="button" value="返回列表" class="spbg buttombg f14"
 				onclick="javascript:location='AuctionListServlet?pageIndex=<%=pageIndex%>'" />
 		</div>

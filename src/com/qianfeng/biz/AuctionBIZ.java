@@ -17,10 +17,10 @@ public interface AuctionBIZ {
  
  String auctionAdd(File userFile,String fileName,String hostPath,Auction auction);
 
- 
+ String auctionUpdate(File userFile,String fileName,String hostPath,Auction auction,String beforeFileName);
  
  Auction auctionFindById(int auctionid);
- String auctionUpdate(ServletConfig config,HttpServletRequest request,HttpServletResponse response);
+
  int auctionDelByID(int auctionID);
  
  List<Auction>serchEndAuctionList();

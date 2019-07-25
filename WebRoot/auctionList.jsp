@@ -85,7 +85,7 @@
 </head>
 
 <body>
-	<form action="AuctionSearch.action" method="post">
+	<form action="searAuctionList.action" method="post">
 		<div class="forms">
 			<label for="name">名称</label> <input name="auctionName" type="text"
 				class="nwinput" id="name" /> <label for="time">开始时间</label> <input
@@ -99,7 +99,7 @@
 				<input type="button" onclick="location='addAuction.jsp'" value="发布"
 					class="spbg buttombg f14  sale-buttom buttomb" />
 			</c:if>
-			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="AuctionResultServlet"><b>查看竞拍结果</b>
+			<br /> &nbsp;&nbsp;&nbsp;&nbsp;<a href="auctionResult.action"><b>查看竞拍结果</b>
 			</a>
 		</div>
 	</form>
@@ -112,7 +112,7 @@
 				<h1 class="lf">在线拍卖系统</h1>
 				<c:if test="${not empty sessionScope.user}">
 					<div class="logout right">
-						<a href="AuctionLogoutServlet" title="注销">注销</a>
+						<a href="logout.action" title="注销">注销</a>
 					</div>
 				</c:if>
 				<c:if test="${empty sessionScope.user}">
@@ -139,11 +139,11 @@
 						<li>${auction.auctionStartPrice }</li>
 						<li class="borderno red"><c:if
 								test="${sessionScope.user.userIsAdmin==true }">
-								<a href="auctionDel.action?auctionid=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
+								<a href="findAuctionById.action?auctionID=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">修改</a>
           	<a auctionid="${auction.auctionID}" onclick="delAuction(this)" href="#">删除</a>	
           	</c:if> <c:if test="${sessionScope.user.userIsAdmin==false }">
-								<a href="AuctionRecordServlet?auctionId=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
-							</c:if></li>
+								<a href="auctionDetail.action?auctionID=${auction.auctionID }&pageIndex=${auctionPageInfo.pageIndex}">竞拍</a>
+							</c:if></li>    <!-- 这里有问题 -->
 					</ul>
 				</c:forEach>
 				<%

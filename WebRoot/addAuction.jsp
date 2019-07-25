@@ -33,7 +33,7 @@ function previewFile() {
  }
 }
 function updateAuction(){
-  document.forms[0].action="AuctionUpdateServlet?pageIndex=<%=pageIndex%>";
+  document.forms[0].action="auctionUpdate.action?pageIndex=<%=pageIndex%>";
   document.forms[0].submit();
 }
 </script>
@@ -100,7 +100,7 @@ function updateAuction(){
 								height="100" />
 						</div>
 						<input id="pic" name="userFile" type="file" class="offset10 lf" onchange="previewFile()" /> <input
-							name="pic02" style="display:none;" type="text" class="offset10 lf"
+							name="beforeFileName" style="display:none;" type="text" class="offset10 lf"
 							value="${auction.auctionPICPath}" />
 						<div id="picid" class="lf red laba">请上传图片</div>
 					</dd>
