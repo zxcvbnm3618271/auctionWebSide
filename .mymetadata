@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="auction_ssh"
-  id="myeclipse.1563160666291"
-  context-root="/auction_ssh"
+  name="auction-ssh"
+  id="myeclipse.1563160667161"
+  context-root="/auction-ssh"
   j2ee-spec="6.0"
-  archive="auction_ssh.war">
+  archive="auction-ssh.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

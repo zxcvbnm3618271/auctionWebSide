@@ -6,32 +6,27 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-
-<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="url" value="jdbc:mysql://39.108.55.167:3306/test03">
+		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value="2FF39aa8820f"></property>
 	</bean>
-	
+
 	<bean id="dataSourceTransactionManager"
-	  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	<property name="dataSource" ref="dataSource"></property>
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
-	<tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
-	
+
+	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" />
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="configLocation"
-			value="classpath:hibernate.cfg.xml">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
 		</property>
 	</bean>
-	
-	
-	</beans>
+
+
+</beans>

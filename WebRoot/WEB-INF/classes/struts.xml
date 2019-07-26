@@ -1,166 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<!-- <constant name="struts.multipart.maxSize" value="22097152"></constant> -->
 	<package name="auctionuser" extends="struts-default" namespace="/">
-		<action name="login" class="com.qianfeng.action.AuctionUserAction"
+		<action name="login" class="com.qf.tesla.action.AuctioinUserAction"
 			method="login">
-			<!-- result默认类型是转发 这里是重定向 -->
+			<!-- 默认是转发 -->
 			<result name="success" type="redirectAction">
-				<!-- 访问action的地址 -->
+				<!--访问action的地址 -->
 				<param name="actionName">auctionListByPage</param>
-				<!-- 访问包名地址 -->
+				<!--访问包名的地址 -->
 				<param name="namespace">/</param>
 				<!-- action中对应的函数 -->
 				<param name="method">auctionListByPage</param>
-				<!-- -->
+				<!--name="msg"传参数的键，可以任意，${msg}为值 -->
 				<param name="msg">${msg}</param>
 			</result>
-			<result name="input">/login.jsp</result>
-		</action>
-		
-			<action name="logout" class="com.qianfeng.action.AuctionUserAction"
-			method="logout">
-			<result type="redirectAction">
-			<param name="actionName">login</param>
-			<param name="namespace">/</param>
+			<result name="input">
+				/login.jsp
 			</result>
-			
 		</action>
-		
+
+		<action name="logout" class="com.qf.tesla.action.AuctioinUserAction"
+			method="logout">
+			<!-- <result name="success" type="redirectAction"> <param name="actionName">login</param> 
+				<param name="namespace">/</param> </result> -->
+			<result>/login.jsp</result>
+		</action>
 	</package>
 
-	<package name="auction" extends="struts-default,json-default" 
-	namespace="/">
-	
-	<interceptors>
-	   <interceptor name="loginInterceptor"
-	       class="com.qianfeng.interceptor.LoginInterceptor"></interceptor>
-	  <interceptor-stack name="login">
-	   <interceptor-ref name="loginInterceptor"></interceptor-ref>
-	    <!--默认拦截器必须写 作用域在当前包  -->
-	    <interceptor-ref name="defaultStack"></interceptor-ref>
-	  </interceptor-stack>
-	 
-	</interceptors>
-	<!-- 拦截这个包的所有 -->
-	<default-interceptor-ref name="login"></default-interceptor-ref>
-	
-	<!-- 所有action共享 -->
-	<global-results>
-	<result name="login">/login.jsp</result>
-	</global-results>
-	<!-- 拦截器必须放在最上面 -->
-	
-	
-	
-	
-	
-		<action name="auctionListByPage" class="com.qianfeng.action.AuctionAction"
+	<package name="auction" extends="struts-default,json-default"
+		namespace="/">
+		<!--拦截器必须写在包的最上面 -->
+		<interceptors>
+			<interceptor name="LoginInterceptor"
+				class="com.qf.tesla.interceptor.LoginInterceptor">
+			</interceptor>
+			<!-- 拦截栈就是一个或多个拦截器的集合 -->
+			<interceptor-stack name="login">
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+				<!-- 必须要有默认，否则被自定义的覆盖 -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- auction包下面的所有action都会被此拦截栈拦截 -->
+		<!-- 默认拦截器的作用域是当前包 -->
+		<default-interceptor-ref name="login"></default-interceptor-ref>
+		<!-- 所有action共享的result，必须写在拦截器下，action上 -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+		<action name="auctionListByPage" class="com.qf.tesla.action.AuctionAction"
 			method="auctionListByPage">
 			<result name="success">/auctionList.jsp</result>
-			<result name="input">/error.jsp</result>
+			<result name="input">/auctionList.jsp</result>
 		</action>
-		
-			
-		<action name="auctionAdd" class="com.qianfeng.action.AuctionAction"
-			method="auctionAdd">
-			<result name="success"  type="redirectAction">
-			<param name="actionName">auctionListByPage</param>
-			<param name="namespace">/</param>
-			<param name="msg">${msg}</param>
-			</result>
-		
-			<result name="input" type="redirectAction">	
-			<param name="actionName">auctionListByPage</param>
-			<param name="namespace">/</param>
-			<param name="msg">${msg}</param>
-			</result>
-			
-		</action>
-		
-		
-		
-			
-		<action name="auctionUpdate" class="com.qianfeng.action.AuctionAction"
-			method="auctionUpdate">
-			<result name="success"  type="redirectAction">
-			<param name="actionName">auctionListByPage</param>
-			<param name="namespace">/</param>
-			<param name="msg">${msg}</param>
-			<param name="pageIndex">${pageIndex}</param>
-			</result>
-		
-			<result name="input" type="redirectAction">	
-			<param name="actionName">auctionListByPage</param>
-			<param name="namespace">/</param>
-			<param name="msg">${msg}</param>
-			</result>
-			
-		</action>
-		
-		
-		
-		
-		
-		<action name="auctionDel" class="com.qianfeng.action.AuctionAction"
-			method="del">
+		<!-- struts2开接口 -->
+		<action name="test01" class="com.qf.tesla.action.Test" method="test01">
 			<result type="json">
-			<param name="root">delete</param>
+				<param name="root">auctions</param>
 			</result>
-			
 		</action>
-		
-		
-		<action name="findAuctionById" class="com.qianfeng.action.AuctionAction"
+
+		<action name="auctionDel" class="com.qf.tesla.action.AuctionAction"
+			method="delete">
+			<result name="success" type="json">
+				<param name="root">delete</param>
+			</result>
+		</action>
+		<action name="AuctionAdd" class="com.qf.tesla.action.AuctionAction"
+			method="add">
+			<result name="success" type="redirectAction">
+				<param name="actionName">auctionListByPage</param>
+				<param name="namespace">/</param>
+				<param name="msg">${msg}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">auctionListByPage</param>
+				<param name="namespace">/</param>
+				<param name="msg">${msg}</param>
+				<param name="pageIndex">${pageIndex}</param>
+			</result>
+		</action>
+		<action name="AuctionAUpdate" class="com.qf.tesla.action.AuctionAction"
+			method="AuctionAUpdate">
+			<result name="success" type="redirectAction">
+				<param name="actionName">auctionListByPage</param>
+				<param name="namespace">/</param>
+				<param name="msg">${msg}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">auctionListByPage</param>
+				<param name="namespace">/</param>
+				<param name="msg">${msg}</param>
+			</result>
+		</action>
+
+		<action name="findAuctionById" class="com.qf.tesla.action.AuctionAction"
 			method="findAuctionById">
 			<result name="success">
-			  /addAuction.jsp
+				/addAuction.jsp
 			</result>
-			
+
 		</action>
-		
-		
-		<action name="searAuctionList" class="com.qianfeng.action.AuctionAction"
+
+		<action name="searchAuctionList" class="com.qf.tesla.action.AuctionAction"
 			method="searchAuctionList">
-			<result>
-			  /auctionList.jsp
+			<result name="success">
+				/auctionList.jsp
 			</result>
-			
 		</action>
-		
-	
-		
-		
-		<action name="auctionResult" class="com.qianfeng.action.AuctionAction"
+
+		<action name="auctionResult" class="com.qf.tesla.action.AuctionAction"
 			method="auctionResult">
-			<result>
-			  /auctionResult.jsp
+			<result name="success">
+				/auctionResult.jsp
+			</result>
+		</action>
+
+
+	</package>
+	<package name="auctionRecord" extends="struts-default"
+		namespace="/">
+
+		<interceptors>
+			<interceptor name="LoginInterceptor"
+				class="com.qf.tesla.interceptor.LoginInterceptor">
+			</interceptor>
+			<!-- 拦截栈就是一个或多个拦截器的集合 -->
+			<interceptor-stack name="login">
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+				<!-- 必须要有默认，否则被自定义的覆盖 -->
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- auction包下面的所有action都会被此拦截栈拦截 -->
+		<!-- 默认拦截器的作用域是当前包 -->
+		<default-interceptor-ref name="login"></default-interceptor-ref>
+		<!-- 所有action共享，必须写在拦截器下，action上 -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+
+		<action name="addAuctionRecord" class="com.qf.tesla.action.AuctionRecordAction"
+			method="addAuctionRecord">
+			<result name="success" type="redirectAction">
+				<param name="actionName">auctionDetail</param>
+				<param name="namespace">/</param>
+				<param name="auctionId">${auctionRecord.auction.auctionId}</param>
+				<param name="msg">${msg}</param>
+				<param name="pageIndex">${pageIndex}</param>
 			</result>
 			
+			<result name="input">
+				/error.jsp
+			</result>
 		</action>
-		
-		
+
+		<action name="auctionDetail" class="com.qf.tesla.action.AuctionRecordAction"
+			method="auctionDetail">
+			<result name="success">
+				/auctionDetail.jsp
+			</result>
+
+		</action>
+
 	</package>
 
-	<package name="auctionRecord" extends="struts-default"
-	 namespace="/">
-	 
-	 <action name="auctionDetail" class="com.qianfeng.action.AuctionRecordAction"
-			method="auctionDetail">
-			<result name="success">/auctionDetail.jsp</result>
-			
-		</action>
-	 
-	 
-		<action name="auctionRecordAdd" class="com.qianfeng.action.AuctionRecordAction"
-			method="auctionRecordAdd">
-			<result name="success" type="redirectAction">
-			<param name="actionName">auctionDetail</param>
-			<param name="namespace">/</param>
-			<param name="auctionID">${auctionRecord.auction.auctionID}</param>
-			<param name="msg">${msg}</param>
-			</result>
-		</action>
-	</package>
+
+
+
 </struts>    

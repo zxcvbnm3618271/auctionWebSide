@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>拍卖概况</title>
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -50,7 +50,7 @@
 			</div>
 		</c:if>
 
-		<c:if test="${fn:length(requestScope.map['notend'])!=0}">
+		<c:if test="${fn:length(requestScope.map['notEnd'])!=0}">
 			<h1>拍卖中的商品</h1>
 			<div class="items records">
 				<ul class="rows even strong rowh">
@@ -61,7 +61,7 @@
 					<li class="borderno record">图片</li>
 					<div class="cl"></div>
 				</ul>
-				<c:forEach items="${requestScope.map['notend'] }" var="notend">
+				<c:forEach items="${requestScope.map['notEnd'] }" var="notend">
 					<ul class="rows">
 						<li>${notend.auctionName }</li>
 						<li>${notend.auctionStartTime }</li>

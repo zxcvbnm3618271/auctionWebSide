@@ -1,10 +1,10 @@
 #MyEclipse Hibernate Properties
-#Mon Jul 22 09:34:33 CST 2019
+#Fri Jul 26 10:45:10 CST 2019
 sessionFactoryName=
 genBasicCompId=false
 profile=
 daoSFId=
-version=3.3
+version=3.2
 jndiPath=
 detectM2M=false
 reStrategyClass=
@@ -19,7 +19,6 @@ sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false
 reSettingsFile=
-configFile=/auction_ssh/src/hibernate.cfg.xml
+configFile=/auction-ssh/src/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true
-baseDaoClass=
