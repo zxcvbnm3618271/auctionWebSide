@@ -18,9 +18,44 @@
 			</result>
 			<result name="input">/login.jsp</result>
 		</action>
+		
+			<action name="logout" class="com.qianfeng.action.AuctionUserAction"
+			method="logout">
+			<result type="redirectAction">
+			<param name="actionName">login</param>
+			<param name="namespace">/</param>
+			</result>
+			
+		</action>
+		
 	</package>
 
-	<package name="auction" extends="struts-default,json-default" namespace="/">
+	<package name="auction" extends="struts-default,json-default" 
+	namespace="/">
+	
+	<interceptors>
+	   <interceptor name="loginInterceptor"
+	       class="com.qianfeng.interceptor.LoginInterceptor"></interceptor>
+	  <interceptor-stack name="login">
+	   <interceptor-ref name="loginInterceptor"></interceptor-ref>
+	    <!--默认拦截器必须写 作用域在当前包  -->
+	    <interceptor-ref name="defaultStack"></interceptor-ref>
+	  </interceptor-stack>
+	 
+	</interceptors>
+	<!-- 拦截这个包的所有 -->
+	<default-interceptor-ref name="login"></default-interceptor-ref>
+	
+	<!-- 所有action共享 -->
+	<global-results>
+	<result name="login">/login.jsp</result>
+	</global-results>
+	<!-- 拦截器必须放在最上面 -->
+	
+	
+	
+	
+	
 		<action name="auctionListByPage" class="com.qianfeng.action.AuctionAction"
 			method="auctionListByPage">
 			<result name="success">/auctionList.jsp</result>
@@ -94,13 +129,7 @@
 			
 		</action>
 		
-		<action name="logout" class="com.qianfeng.action.AuctionAction"
-			method="logout">
-			<result>
-			  /login.jsp
-			</result>
-			
-		</action>
+	
 		
 		
 		<action name="auctionResult" class="com.qianfeng.action.AuctionAction"

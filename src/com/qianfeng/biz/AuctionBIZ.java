@@ -1,35 +1,41 @@
 package com.qianfeng.biz;
 
-import java.io.File;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FileUtils;
 
+import com.qianfeng.dao.AuctionDAO;
 import com.qianfeng.entity.Auction;
+import com.qianfeng.enums.AuctionStateEnum;
 
 public interface AuctionBIZ {
- List<Auction>auctionListByPage(BigDecimal pageIndex,BigDecimal pageNum);
- BigDecimal getAllcount();
- 
- 
- String auctionAdd(File userFile,String fileName,String hostPath,Auction auction);
 
- String auctionUpdate(File userFile,String fileName,String hostPath,Auction auction,String beforeFileName);
- 
- Auction auctionFindById(int auctionid);
+	 List<Auction>auctionListByPage(BigDecimal pageIndex,BigDecimal pageNum);
+		
+	  BigDecimal getAllcount();
+	
+	 String auctionAdd(java.io.File userFile,String fileName,String hostPath,Auction auction);
 
- int auctionDelByID(int auctionID);
- 
- List<Auction>serchEndAuctionList();
- List<Auction>serchNotEndAuctionList();
- List<Auction>searchAuctionList(String auctionName,String auctionStartTime,
-		 String auctionEndTime,String auctionStartPrice);
- 
- 
- 
- 
+ Auction auctionFindById(int auctionId);
+
+int auctionDelByID(int auctionID);	
+	
+	 List<Auction> serchEndAuctionList();
+		
+
+ List<Auction> serchNotEndAuctionList();	
+	
+	List<Auction> searchAuctionList(String auctionName,
+			String auctionStartTime, String auctionEndTime,
+			String auctionStartPrice);
+		
+	String auctionUpdate(java.io.File userFile, String fileName,
+			String hostPath, Auction auction, String beforeFileName);
+				
+	
+
 }
-

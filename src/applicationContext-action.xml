@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+	<!-- <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+ -->
+
+	<bean class="com.qianfeng.action.AuctionUserAction" scope="prototype">
+		<property name="auctionUserBIZ">
+			<ref bean="auctionUserBIZ"/>
+		</property>
+		<!-- <property name="auctionUser">
+			<ref bean="auctionUser"/>
+		</property> -->
+	</bean>
+	
+	<bean class="com.qianfeng.action.AuctionAction" scope="prototype">
+		<property name="auctionBIZ">
+			<ref bean="auctionBIZ"/>
+		</property>
+	</bean>
+	
+	<bean class="com.qianfeng.action.AuctionRecordAction" scope="prototype">
+		<property name="auctionBIZ">
+			<ref bean="auctionBIZ"/>
+		</property>
+		<property name="auctionRecordBIZ">
+			<ref bean="auctionRecordBIZ"/>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	</beans>

@@ -29,7 +29,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class AuctionBIZImpl implements AuctionBIZ {
 	
-	AuctionDAO auctionDAO=new AuctionDAOImpl();
+	AuctionDAO auctionDAO;
 	
 	 public List<Auction>auctionListByPage(BigDecimal pageIndex,BigDecimal pageNum){
 		//娌℃湁涓氬姟閫昏緫涔熻鏈変笟鍔″眰 浠ュ悗鍙戝睍浼氭湁
@@ -41,6 +41,14 @@ public class AuctionBIZImpl implements AuctionBIZ {
 		return auctionDAO.getAllcount();
 		 
 	 }
+	 
+	 
+	public AuctionDAO getAuctionDAO() {
+		return auctionDAO;
+	}
+	public void setAuctionDAO(AuctionDAO auctionDAO) {
+		this.auctionDAO = auctionDAO;
+	}
 	@Override
 	public String auctionAdd(java.io.File userFile,String fileName,String hostPath,Auction auction){
 

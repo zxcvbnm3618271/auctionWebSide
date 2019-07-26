@@ -12,6 +12,10 @@ import com.qianfeng.util.StringUtil;
 
 public class AuctionUserBIZImpl implements AuctionUserBIZ {
 
+	
+	
+	AuctionUserDAO auctionUserDAO;
+
 	@Override
 	public String auctionUserLogin(String userName, String passWord,
 			String userInputCode, String sysCode,HttpServletRequest request) {
@@ -25,7 +29,6 @@ public class AuctionUserBIZImpl implements AuctionUserBIZ {
 			return AuctionLoginStateEnum.AUCTION_LOGIN_VALIDATACODE_ERROR.getValue();
 		}
 		
-		AuctionUserDAO auctionUserDAO=new AuctionUserDAOImpl();
 		AuctionUser auctionUser=auctionUserDAO.auctionLogin(userName,MD5.MD5(passWord));
 		if(auctionUser==null){
 			return AuctionLoginStateEnum.AUCTION_LOGIN_FAIL.getValue();
@@ -34,6 +37,15 @@ public class AuctionUserBIZImpl implements AuctionUserBIZ {
 		request.getSession().setAttribute("user", auctionUser);
 	
 		return AuctionLoginStateEnum.AUCTION_LOGIN_SUCCESS.getValue();
+	}
+	public AuctionUserDAO getAuctionUserDAO() {
+		return auctionUserDAO;
+	}
+	
+	
+	
+	public void setAuctionUserDAO(AuctionUserDAO auctionUserDAO) {
+		this.auctionUserDAO = auctionUserDAO;
 	}
 
 }

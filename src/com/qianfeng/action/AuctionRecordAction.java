@@ -21,8 +21,8 @@ public class AuctionRecordAction extends ActionSupport implements
 	private Auction auctionObj; 
 	private List<AuctionRecord> record_list;
 	
-	AuctionBIZ auctionBIZ=new AuctionBIZImpl();
-	AuctionRecordBIZ auctionRecordBIZ=new AuctionRecordBIZImpl();
+	AuctionBIZ auctionBIZ;
+	AuctionRecordBIZ auctionRecordBIZ;
 
 	private int pageIndex;
 	private int auctionID;
@@ -31,6 +31,26 @@ public class AuctionRecordAction extends ActionSupport implements
 	
 	
 	
+	public AuctionBIZ getAuctionBIZ() {
+		return auctionBIZ;
+	}
+
+
+	public void setAuctionBIZ(AuctionBIZ auctionBIZ) {
+		this.auctionBIZ = auctionBIZ;
+	}
+
+
+	public AuctionRecordBIZ getAuctionRecordBIZ() {
+		return auctionRecordBIZ;
+	}
+
+
+	public void setAuctionRecordBIZ(AuctionRecordBIZ auctionRecordBIZ) {
+		this.auctionRecordBIZ = auctionRecordBIZ;
+	}
+
+
 	public String auctionRecordAdd(){
 		try {
 		int result=	auctionRecordBIZ.auctionRecordAdd(auctionRecord);

@@ -30,15 +30,26 @@ public class AuctionAction extends ActionSupport implements
 
 	private PageVO<Auction> auctionPageInfo = new PageVO<Auction>();
 
-	private Auction auction = new Auction();
+	private Auction auction=new Auction();
 
 	private String beforeFileName;
 
 	public Map<String, Object> map = new HashMap<String, Object>();
 
-	AuctionBIZ auctionBIZ = new AuctionBIZImpl();
+	AuctionBIZ auctionBIZ ;
 	private File userFile;
 	private String userFileFileName;
+	
+	
+	
+
+	public AuctionBIZ getAuctionBIZ() {
+		return auctionBIZ;
+	}
+
+	public void setAuctionBIZ(AuctionBIZ auctionBIZ) {
+		this.auctionBIZ = auctionBIZ;
+	}
 
 	public String auctionListByPage() {
 
@@ -48,7 +59,7 @@ public class AuctionAction extends ActionSupport implements
 				pageIndex = "1";
 			}
 		}
-		AuctionBIZ auctionBIZ = new AuctionBIZImpl();
+		//AuctionBIZ auctionBIZ = new AuctionBIZImpl();
 		BigDecimal totalCount = auctionBIZ.getAllcount();
 		BigDecimal pageIndex2 = null;
 		if (pageIndex != null) {
@@ -146,10 +157,7 @@ public class AuctionAction extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	public String logout() {
-		ServletActionContext.getRequest().getSession().removeAttribute("user");
-		return SUCCESS;
-	}
+	
 
 	public String auctionResult() {
 		List<Auction> endAuctions = auctionBIZ.serchEndAuctionList();

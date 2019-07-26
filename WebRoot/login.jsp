@@ -1,5 +1,6 @@
 <%@page import="com.qianfeng.enums.AuctionLoginStateEnum"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -57,9 +58,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <dl>
         <dt class="blues">用户登陆</dt>
         <dd><label for="name">用户名：</label>
-        	<input type="text" name="userName" class="inputh" value="${username}" id="name"/></dd>
+        	<input type="text" name="userName" class="inputh" value="${username}" id="name"/><span style="color:red;">
+        	<s:fielderror>
+        	 <s:param>usNameMsg</s:param>
+        	</s:fielderror>
+        	</span>
+        	</dd>
         <dd><label for="password">密 码：</label>
-        	<input type="password" name="userPassWord" class="inputh" value="${userpassword}" id="password"/></dd>
+        	<input type="password" name="userPassWord" class="inputh" value="${userpassword}" id="password"/>
+        	<span style="color:red;">
+        	<s:fielderror>
+        	 <s:param>pwdMsg</s:param>
+        	</s:fielderror>
+        	</span>
+        	</dd>
         <dd>
            <label class="lf" for="passwords">验证码：</label>
            <input type="text" name="userInputCode" class="inputh inputs lf" value="验证码" id="passwords"/>

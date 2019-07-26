@@ -23,7 +23,6 @@
 </head>
 
 <body>
-	hello ${user}
-	<br>
+	<jsp:forward page="login.action"></jsp:forward>
 </body>
 </html>

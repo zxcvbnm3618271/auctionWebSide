@@ -10,7 +10,16 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class AuctionRecordBIZImpl implements AuctionRecordBIZ {
 
-	AuctionRecordDAO auctionRecordDAO=new AuctionRecordDAOImpl();
+	AuctionRecordDAO auctionRecordDAO;
+	
+	
+	
+	public AuctionRecordDAO getAuctionRecordDAO() {
+		return auctionRecordDAO;
+	}
+	public void setAuctionRecordDAO(AuctionRecordDAO auctionRecordDAO) {
+		this.auctionRecordDAO = auctionRecordDAO;
+	}
 	@Override
 	public List<AuctionRecord> findAuctionRecordByAuctionId(int auctionID) {
 		// TODO Auto-generated method stub
